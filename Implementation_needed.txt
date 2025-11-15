@@ -1,0 +1,10 @@
+1. Remove password from signup response.
+2. Add JWT token generation on login.
+3. Create auth middleware to protect private routes.
+4. Add /profile route to return logged-in user details.
+5. Add basic input validation (email + password length).
+6. Move JWT secret and DB URL into .env file.
+7. Use proper status codes (200, 201, 400, 401, 500).
+8. Return clean JSON format from all routes.
+9. Improve folder structure (routes / controllers / middleware).
+10. Keep all passwords hashed using bcrypt (already good).

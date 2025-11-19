@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Bg from "../assets/bhs.jpg";
+import { Link } from "react-router-dom";
 
 const Sigin = () => {
   const [name, setName] = useState("");
@@ -14,12 +15,17 @@ const Sigin = () => {
 
     e.preventDefault();
     const data = { name, email, password };
-    await fetch("http://10.71.85.100:5000/auth/signin", {
+    let res = await fetch("http://10.71.85.100:5000/auth/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-    navigate("/feed");
+    if (res.ok) {
+      navigate("/feed");
+    } else {
+      console.log("Error");
+    }
+
     console.log("Submit clicked 2");
   };
 
@@ -47,7 +53,6 @@ const Sigin = () => {
             value={name}
             required
           />
-
           <input
             className="border p-3 rounded"
             type="email"
@@ -58,7 +63,6 @@ const Sigin = () => {
             value={email}
             required
           />
-
           <input
             className="border p-3 rounded"
             type="password"
@@ -79,10 +83,15 @@ const Sigin = () => {
               }}
             />
           </label> */}
-
           <button type="submit" className="bg-blue-500 text-white py-3 rounded">
             Submit
           </button>
+          <p>
+            Already have an account{" "}
+            <Link to="/login" className="text-blue-600">
+              login
+            </Link>{" "}
+          </p>
         </form>
       </div>
     </div>

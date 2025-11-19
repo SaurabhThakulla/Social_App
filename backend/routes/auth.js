@@ -39,7 +39,7 @@ router.post("/login", async (req, res) => {
           .json({ message: "Login succesfull", email: user.email });
       }
     } else {
-      return res.send("User not found");
+      return res.status(400).json({ message: "User not found" });
     }
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });

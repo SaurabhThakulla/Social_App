@@ -37,7 +37,7 @@ const Sigin = () => {
         top-1/2 right-20 -translate-y-1/2 
         justify-center flex-col gap-8 p-10 rounded-xl shadow-xl"
       >
-        <h2 className="text-2xl font-semibold text-center">Signup</h2>
+        <h2 className="text-2xl font-semibold text-center">Login</h2>
 
         <form onSubmit={submit} className="flex flex-col gap-5">
           <input

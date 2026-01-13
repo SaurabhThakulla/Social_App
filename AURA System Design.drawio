@@ -310,7 +310,7 @@
           <mxGeometry height="30" width="120" x="7" y="45" as="geometry" />
         </mxCell>
         <mxCell id="EqI3txbFDAzWO5inGkdf-30" parent="EqI3txbFDAzWO5inGkdf-26" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Password" vertex="1">
-          <mxGeometry height="30" width="120" x="18" y="105" as="geometry" />
+          <mxGeometry height="30" width="120" x="17" y="105" as="geometry" />
         </mxCell>
         <mxCell id="EqI3txbFDAzWO5inGkdf-33" edge="1" parent="1" source="EqI3txbFDAzWO5inGkdf-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0.662;entryY=1.049;entryDx=0;entryDy=0;entryPerimeter=0;" target="GB8nW31cmaS8L4SjN0Dy-34">
           <mxGeometry relative="1" as="geometry" />

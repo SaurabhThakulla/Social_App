@@ -1,4 +1,3 @@
-import * as React from "react";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -34,7 +33,7 @@ const Signin = () => {
 
   return (
     <Form {...form}>
-      <div className="sm:w-[340px] flex-center flex-col">
+      <div className="sm:w-[340px] flex-center flex-col ">
         <img src={logo} alt="" />
         <h1 className="text-light-3 small-medium md:base-regular mt-2">
           Login to Your Account

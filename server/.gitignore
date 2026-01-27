@@ -1,0 +1,86 @@
+# -------------------------
+# Dependencies
+# -------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# -------------------------
+# Environment variables
+# -------------------------
+.env
+.env.*
+!.env.example
+
+# -------------------------
+# Build output
+# -------------------------
+dist/
+build/
+out/
+
+# -------------------------
+# TypeScript
+# -------------------------
+*.tsbuildinfo
+
+# -------------------------
+# Logs
+# -------------------------
+logs/
+*.log
+
+# -------------------------
+# Runtime data
+# -------------------------
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# -------------------------
+# Cache & temp files
+# -------------------------
+.cache/
+.tmp/
+temp/
+
+# -------------------------
+# IDE / Editor
+# -------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# -------------------------
+# OS files
+# -------------------------
+.DS_Store
+Thumbs.db
+
+# -------------------------
+# Coverage reports
+# -------------------------
+coverage/
+
+# -------------------------
+# Database
+# -------------------------
+*.sqlite
+*.sqlite3
+*.db
+
+# -------------------------
+# Uploads / local assets
+# -------------------------
+uploads/
+public/uploads/
+
+# -------------------------
+# Replit / Deployment secrets
+# -------------------------
+.replit
+X_REPLIT_TOKEN

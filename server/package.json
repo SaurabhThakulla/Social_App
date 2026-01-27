@@ -1,17 +1,20 @@
 {
-  "name": "server",
+  "name": "aura-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend for Aura Social App",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "type": "commonjs",
+  "scripts": {
+    "dev": "tsx server/index.ts",
+    "start": "cross-env NODE_ENV=production node index.js"
+    
+  },
   "dependencies": {
-    "dotenv": "^17.2.3",
-    "express": "^5.2.1"
+    "express": "^4.19.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
   }
 }

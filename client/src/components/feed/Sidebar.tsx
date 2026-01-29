@@ -34,24 +34,24 @@ export default function Sidebar() {
                     <MenuItem
                         icon={<Mail size={18} />}
                         label="Messages"
-                        badge="6" active={undefined}                    />
+                        badge="6" active={undefined}/>
 
                     <MenuItem
                         icon={<MessageCircle size={18} />}
-                        label="Forums" badge={undefined} active={undefined}                    />
+                        label="Forums" badge={undefined} active={undefined}/>
 
                     <MenuItem
                         icon={<Users size={18} />}
                         label="Friends"
-                        badge="8" active={undefined}                    />
+                        badge="8" active={undefined}/>
 
                     <MenuItem
                         icon={<Image size={18} />}
-                        label="Media" badge={undefined} active={undefined}                    />
+                        label="Media" badge={undefined} active={undefined}/>
 
                     <MenuItem
                         icon={<Settings size={18} />}
-                        label="Settings" badge={undefined} active={undefined}                    />
+                        label="Settings" badge={undefined} active={undefined}/>
 
                 </nav>
             </div>

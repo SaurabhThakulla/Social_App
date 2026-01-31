@@ -1,0 +1,216 @@
+{
+  "users": {
+    "usr_001": {
+      "id": "usr_001",
+      "username": "auravibe",
+      "avatar": "AU"
+    },
+    "usr_002": {
+      "id": "usr_002",
+      "username": "neonmind",
+      "avatar": "NM"
+    },
+    "usr_003": {
+      "id": "usr_003",
+      "username": "voidecho",
+      "avatar": "VE"
+    },
+    "usr_004": {
+      "id": "usr_004",
+      "username": "lunarvibes",
+      "avatar": "LV"
+    },
+    "usr_005": {
+      "id": "usr_005",
+      "username": "darkmode",
+      "avatar": "DM"
+    },
+    "usr_006": {
+      "id": "usr_006",
+      "username": "orbitals",
+      "avatar": "OR"
+    },
+    "usr_007": {
+      "id": "usr_007",
+      "username": "softnoise",
+      "avatar": "SN"
+    },
+    "usr_008": {
+      "id": "usr_008",
+      "username": "midnightx",
+      "avatar": "MX"
+    },
+    "usr_009": {
+      "id": "usr_009",
+      "username": "nightlogic",
+      "avatar": "NL"
+    },
+    "usr_010": {
+      "id": "usr_010",
+      "username": "staticflow",
+      "avatar": "SF"
+    }
+  },
+
+  "posts": [
+    {
+      "id": "post_001",
+      "authorId": "usr_001",
+      "content": "late night thoughts 🌙",
+      "createdAt": "2026-01-31T21:10:00Z",
+      "visibility": "public",
+      "metrics": {
+        "likes": 12,
+        "comments": 3,
+        "shares": 1
+      }
+    },
+    {
+      "id": "post_002",
+      "authorId": "usr_002",
+      "content": "quiet days hit different",
+      "createdAt": "2026-01-31T20:55:00Z",
+      "visibility": "public",
+      "metrics": {
+        "likes": 8,
+        "comments": 1,
+        "shares": 0
+      }
+    },
+    {
+      "id": "post_003",
+      "authorId": "usr_003",
+      "content": "music feels louder at night",
+      "createdAt": "2026-01-31T20:30:00Z",
+      "visibility": "public",
+      "metrics": {
+        "likes": 20,
+        "comments": 5,
+        "shares": 4
+      }
+    },
+    {
+      "id": "post_004",
+      "authorId": "usr_004",
+      "content": "healing isn’t linear",
+      "createdAt": "2026-01-31T20:05:00Z",
+      "visibility": "public",
+      "metrics": {
+        "likes": 15,
+        "comments": 2,
+        "shares": 1
+      }
+    },
+    {
+      "id": "post_005",
+      "authorId": "usr_005",
+      "content": "black screens feel safe",
+      "createdAt": "2026-01-31T19:40:00Z",
+      "visibility": "public",
+      "metrics": {
+        "likes": 18,
+        "comments": 4,
+        "shares": 2
+      }
+    },
+    {
+      "id": "post_006",
+      "authorId": "usr_006",
+      "content": "today felt unreal",
+      "createdAt": "2026-01-31T19:10:00Z",
+      "visibility": "public",
+      "metrics": {
+        "likes": 6,
+        "comments": 0,
+        "shares": 0
+      }
+    },
+    {
+      "id": "post_007",
+      "authorId": "usr_007",
+      "content": "minimal words, deep meaning",
+      "createdAt": "2026-01-31T18:50:00Z",
+      "visibility": "public",
+      "metrics": {
+        "likes": 9,
+        "comments": 1,
+        "shares": 1
+      }
+    },
+    {
+      "id": "post_008",
+      "authorId": "usr_008",
+      "content": "why does silence feel heavy?",
+      "createdAt": "2026-01-31T18:20:00Z",
+      "visibility": "public",
+      "metrics": {
+        "likes": 11,
+        "comments": 3,
+        "shares": 0
+      }
+    },
+    {
+      "id": "post_009",
+      "authorId": "usr_009",
+      "content": "thinking too much again",
+      "createdAt": "2026-01-31T17:55:00Z",
+      "visibility": "public",
+      "metrics": {
+        "likes": 7,
+        "comments": 2,
+        "shares": 0
+      }
+    },
+    {
+      "id": "post_010",
+      "authorId": "usr_010",
+      "content": "offline but thinking",
+      "createdAt": "2026-01-31T17:20:00Z",
+      "visibility": "public",
+      "metrics": {
+        "likes": 5,
+        "comments": 0,
+        "shares": 0
+      }
+    }
+  ],
+
+  "stories": [
+    { "id": "story_001", "userId": "usr_001", "expiresAt": "2026-02-01T21:10:00Z" },
+    { "id": "story_002", "userId": "usr_002", "expiresAt": "2026-02-01T20:55:00Z" },
+    { "id": "story_003", "userId": "usr_003", "expiresAt": "2026-02-01T20:30:00Z" },
+    { "id": "story_004", "userId": "usr_004", "expiresAt": "2026-02-01T20:05:00Z" },
+    { "id": "story_005", "userId": "usr_005", "expiresAt": "2026-02-01T19:40:00Z" },
+    { "id": "story_006", "userId": "usr_006", "expiresAt": "2026-02-01T19:10:00Z" },
+    { "id": "story_007", "userId": "usr_007", "expiresAt": "2026-02-01T18:50:00Z" },
+    { "id": "story_008", "userId": "usr_008", "expiresAt": "2026-02-01T18:20:00Z" },
+    { "id": "story_009", "userId": "usr_009", "expiresAt": "2026-02-01T17:55:00Z" },
+    { "id": "story_010", "userId": "usr_010", "expiresAt": "2026-02-01T17:20:00Z" }
+  ],
+
+  "suggestions": [
+    { "id": "usr_011", "username": "NickShelburne" },
+    { "id": "usr_012", "username": "BrittniLando" },
+    { "id": "usr_013", "username": "AidenRoss" },
+    { "id": "usr_014", "username": "MayaChen" },
+    { "id": "usr_015", "username": "LeoCarter" },
+    { "id": "usr_016", "username": "NinaPatel" },
+    { "id": "usr_017", "username": "EvanBrooks" },
+    { "id": "usr_018", "username": "SofiaMiles" },
+    { "id": "usr_019", "username": "RyanWolfe" },
+    { "id": "usr_020", "username": "IrisMoon" }
+  ],
+
+  "tags": [
+    { "id": "music", "label": "Music" },
+    { "id": "uiux", "label": "UI/UX" },
+    { "id": "cooking", "label": "Cooking" },
+    { "id": "hiking", "label": "Hiking" },
+    { "id": "photography", "label": "Photography" },
+    { "id": "design", "label": "Design" },
+    { "id": "mental_health", "label": "Mental Health" },
+    { "id": "productivity", "label": "Productivity" },
+    { "id": "journaling", "label": "Journaling" },
+    { "id": "startups", "label": "Startups" }
+  ]
+}

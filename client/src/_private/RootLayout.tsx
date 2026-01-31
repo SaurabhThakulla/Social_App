@@ -1,7 +1,6 @@
 import { Home, Profile, Stories  } from "./pages";
 import AppSidebar from "@/components/AppSidebar";
 
-
 const RootLayout = () => {
   const profile = false;
   return(

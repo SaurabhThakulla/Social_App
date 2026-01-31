@@ -7,18 +7,22 @@ import {
     getUsers
 } from "@/api/api";
 import { shuffleArray } from "@/lib/shuffle";
+import type { Post } from "@/lib/types/types";
+import type { Story } from "@/lib/types/types";
+import type { Suggestion } from "@/lib/types/types";
+import type { Tag } from "@/lib/types/types";
+import type { User } from "@/lib/types/types";
 
 export const usePosts = () => {
-     return useQuery({
+    return useQuery<Post[]>({
         queryKey: ['posts'],
         queryFn: getPosts,
-        select: (data) => shuffleArray(data)
-        
+         select: (data) => shuffleArray(data)
     })
 }
 
 export const useStories = () => {
-    return useQuery({
+    return useQuery<Story[]>({
         queryKey: ['stories'],
         queryFn: getStories,
         select:(data)=> shuffleArray(data)
@@ -26,7 +30,7 @@ export const useStories = () => {
 }
 
 export const useSuggestions = () => {
-    return useQuery({
+    return useQuery<Suggestion[]>({
         queryKey:['suggestions'],
         queryFn: getSuggestions,
         select:(data)=>shuffleArray(data)
@@ -34,7 +38,7 @@ export const useSuggestions = () => {
 }
 
 export const useTags = ()=> {
-    return useQuery({
+    return useQuery<Tag[]>({
         queryKey: ['tags'],
         queryFn: getTags,
         select:(data)=>shuffleArray(data)
@@ -42,7 +46,7 @@ export const useTags = ()=> {
 }
 
 export const useUsers = () => {
-    return useQuery({
+    return useQuery<User[]>({
         queryKey: ['users'],
         queryFn: getUsers,
         select: (data) => shuffleArray(data)

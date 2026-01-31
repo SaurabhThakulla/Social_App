@@ -1,4 +1,3 @@
-import React from "react";
 import { Home, Profile, Stories  } from "./pages";
 import AppSidebar from "@/components/AppSidebar";
 

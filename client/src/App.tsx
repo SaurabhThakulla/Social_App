@@ -1,4 +1,3 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
 import "./global.css";
 import Signin from "./_public/forms/Signin";
@@ -6,6 +5,7 @@ import { Home } from "./_private/pages";
 import Signup from "./_public/forms/Signup";
 import AuthLayout from "./_public/AuthLayout";
 import RootLayout from "./_private/RootLayout";
+import NotFound from "./not-found";
 const App = () => {
   return (
     <main className="flex h-screen">
@@ -19,6 +19,7 @@ const App = () => {
         <Route element={<RootLayout />}>
           <Route index element={<Home />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </main>
   );

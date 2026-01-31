@@ -34,7 +34,7 @@ const Signin = () => {
   return (
     <Form {...form}>
       <div className="sm:w-[340px] flex-center flex-col ">
-        <img src={logo} className="w-[40%]" alt="" />
+        <img src={logo} className="w-[40%] font-red" alt="" />
         <h1 className="text-light-3 small-medium md:base-regular mt-2">
           Login to Your Account
         </h1>

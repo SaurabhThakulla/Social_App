@@ -39,7 +39,7 @@ const Sidebar = () => {
 
             {/* Navigation */}
             <nav className="flex flex-col gap-2 mt-4 px-2">
-                <SidebarItem label="Feed" open={open} />
+                <SidebarItem label="Home" open={open} />
                 <SidebarItem label="Explore" open={open} />
                 <SidebarItem label="Profile" open={open} />
                 <SidebarItem label="Settings" open={open} />

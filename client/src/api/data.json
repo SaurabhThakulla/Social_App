@@ -60,7 +60,8 @@
     "image": "https://picsum.photos/seed/post001/600/400",
     "createdAt": "2026-01-31T21:10:00Z",
     "visibility": "public",
-    "metrics": { "likes": 12, "comments": 3, "shares": 1 }
+    "metrics": { "likes": 12, "comments": 3, "shares": 1 },
+    "tag": "Productivity"
   },
   {
     "id": "post_002",
@@ -69,7 +70,8 @@
     "image": "https://picsum.photos/seed/post002/600/400",
     "createdAt": "2026-01-31T20:55:00Z",
     "visibility": "public",
-    "metrics": { "likes": 8, "comments": 1, "shares": 0 }
+    "metrics": { "likes": 8, "comments": 1, "shares": 0 },
+    "tag": "Journaling"
   },
   {
     "id": "post_003",
@@ -78,7 +80,8 @@
     "image": "https://picsum.photos/seed/post003/600/400",
     "createdAt": "2026-01-31T20:30:00Z",
     "visibility": "public",
-    "metrics": { "likes": 20, "comments": 5, "shares": 4 }
+    "metrics": { "likes": 20, "comments": 5, "shares": 4 },
+    "tag": "Music"
   },
   {
     "id": "post_004",
@@ -87,7 +90,8 @@
     "image": "https://picsum.photos/seed/post004/600/400",
     "createdAt": "2026-01-31T20:05:00Z",
     "visibility": "public",
-    "metrics": { "likes": 15, "comments": 2, "shares": 1 }
+    "metrics": { "likes": 15, "comments": 2, "shares": 1 },
+    "tag": "Music"
   },
   {
     "id": "post_005",
@@ -96,7 +100,8 @@
     "image": "https://picsum.photos/seed/post005/600/400",
     "createdAt": "2026-01-31T19:40:00Z",
     "visibility": "public",
-    "metrics": { "likes": 18, "comments": 4, "shares": 2 }
+    "metrics": { "likes": 18, "comments": 4, "shares": 2 },
+    "tag": "Design"
   },
   {
     "id": "post_006",
@@ -105,7 +110,8 @@
     "image": "https://picsum.photos/seed/post006/600/400",
     "createdAt": "2026-01-31T19:10:00Z",
     "visibility": "public",
-    "metrics": { "likes": 6, "comments": 0, "shares": 0 }
+    "metrics": { "likes": 6, "comments": 0, "shares": 0 },
+    "tag": "Productivity"
   },
   {
     "id": "post_007",
@@ -114,7 +120,8 @@
     "image": "https://picsum.photos/seed/post007/600/400",
     "createdAt": "2026-01-31T18:50:00Z",
     "visibility": "public",
-    "metrics": { "likes": 9, "comments": 1, "shares": 1 }
+    "metrics": { "likes": 9, "comments": 1, "shares": 1 },
+    "tag": "Writing"
   },
   {
     "id": "post_008",
@@ -123,7 +130,8 @@
     "image": "https://picsum.photos/seed/post008/600/400",
     "createdAt": "2026-01-31T18:20:00Z",
     "visibility": "public",
-    "metrics": { "likes": 11, "comments": 3, "shares": 0 }
+    "metrics": { "likes": 11, "comments": 3, "shares": 0 },
+    "tag": "Music"
   },
   {
     "id": "post_009",
@@ -132,7 +140,8 @@
     "image": "https://picsum.photos/seed/post009/600/400",
     "createdAt": "2026-01-31T17:55:00Z",
     "visibility": "public",
-    "metrics": { "likes": 7, "comments": 2, "shares": 0 }
+    "metrics": { "likes": 7, "comments": 2, "shares": 0 },
+    "tag": "Journaling"
   },
   {
     "id": "post_010",
@@ -141,7 +150,8 @@
     "image": "https://picsum.photos/seed/post010/600/400",
     "createdAt": "2026-01-31T17:20:00Z",
     "visibility": "public",
-    "metrics": { "likes": 5, "comments": 0, "shares": 0 }
+    "metrics": { "likes": 5, "comments": 0, "shares": 0 },
+    "tag": "Music"
   }
 ],
 
@@ -169,18 +179,5 @@
     { "id": "usr_018", "username": "SofiaMiles" },
     { "id": "usr_019", "username": "RyanWolfe" },
     { "id": "usr_020", "username": "IrisMoon" }
-  ],
-
-  "tags": [
-    { "id": "music", "label": "Music" },
-    { "id": "uiux", "label": "UI/UX" },
-    { "id": "cooking", "label": "Cooking" },
-    { "id": "hiking", "label": "Hiking" },
-    { "id": "photography", "label": "Photography" },
-    { "id": "design", "label": "Design" },
-    { "id": "mental_health", "label": "Mental Health" },
-    { "id": "productivity", "label": "Productivity" },
-    { "id": "journaling", "label": "Journaling" },
-    { "id": "startups", "label": "Startups" }
   ]
 }

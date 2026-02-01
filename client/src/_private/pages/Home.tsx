@@ -1,8 +1,18 @@
 import { usePosts } from "@/api/queries/index";
 import FeedLoader from "@/components/ui/feed";
+import { useTag } from "@/context/TagProvider";
+
 
 const Home = () => {
   const { data: posts, isLoading } = usePosts();
+  const { activeTag } = useTag();
+
+  const orderedPosts = activeTag
+    ? [
+      ...(posts || []).filter((p) => p.tag === activeTag),
+      ...(posts || []).filter((p) => p.tag !== activeTag),
+    ]
+    : posts || [];
 
   const formatDate = (date: string | number | Date) =>
     new Date(date).toLocaleDateString("en-IN", {
@@ -13,11 +23,15 @@ const Home = () => {
 
   if (isLoading) {
     return (
-      <div className="mt-6">
-        <FeedLoader />
-      </div>
+      <section className="home-container">
+        <div className="w-full">
+          <FeedLoader />
+        </div>
+      </section>
     );
   }
+
+
 
   if (!posts || posts.length === 0) {
     return (
@@ -35,9 +49,9 @@ const Home = () => {
   return (
     <section className="home-container">
       <div className="home-posts mx-auto">
-        {posts.map((e) => {
+        {orderedPosts.map((e) => {
           const { authorId, content, createdAt, metrics, image } = e;
-
+          
           return (
             <div key={e.id} className="mb-6">
               {/* Header */}

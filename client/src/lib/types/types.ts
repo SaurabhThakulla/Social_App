@@ -14,6 +14,7 @@ export type Post = {
         comments: number;
         shares: number;
     };
+    tag: string;
 };
 export type Story = {
     id: string;
@@ -23,8 +24,4 @@ export type Story = {
 export type Suggestion = {
     id: string;
     username: string;
-};
-export type Tag = {
-    id: string;
-    label: string;
 };

@@ -3,14 +3,12 @@ import {
     getPosts,
     getStories,
     getSuggestions,
-    getTags,
     getUsers
 } from "@/api/api";
-import { shuffleArray } from "@/lib/shuffle";
+import { shuffleArray } from "@/lib/hooks/shuffle";
 import type { Post } from "@/lib/types/types";
 import type { Story } from "@/lib/types/types";
 import type { Suggestion } from "@/lib/types/types";
-import type { Tag } from "@/lib/types/types";
 import type { User } from "@/lib/types/types";
 
 export const usePosts = () => {
@@ -33,14 +31,6 @@ export const useSuggestions = () => {
     return useQuery<Suggestion[]>({
         queryKey:['suggestions'],
         queryFn: getSuggestions,
-        select:(data)=>shuffleArray(data)
-    })
-}
-
-export const useTags = ()=> {
-    return useQuery<Tag[]>({
-        queryKey: ['tags'],
-        queryFn: getTags,
         select:(data)=>shuffleArray(data)
     })
 }

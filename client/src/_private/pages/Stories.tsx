@@ -1,4 +1,10 @@
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
+
 const Stories = () => {
+    const [active, setActive] = useState<string | null>(null);
+
+
     return (
         <aside className="home-creators">
 
@@ -33,9 +39,9 @@ const Stories = () => {
                         </div>
                         <p className="small-medium">Nick Shelburne</p>
                     </div>
-                    <button className="shad-button_dark_4 small-medium px-3">
+                    <Button className="shad-button_dark_4 rounded-full small-medium px-3">
                         Sync
-                    </button>
+                    </Button>
                 </div>
 
                 <div className="flex-between mb-3">
@@ -45,9 +51,9 @@ const Stories = () => {
                         </div>
                         <p className="small-medium">Brittni Lando</p>
                     </div>
-                    <button className="shad-button_dark_4 small-medium px-3">
+                    <Button className="shad-button_dark_4 rounded-full small-medium px-3">
                         Sync
-                    </button>
+                    </Button>
                 </div>
 
                 <p className="tiny-medium text-light-4 cursor-pointer">See all</p>
@@ -57,10 +63,33 @@ const Stories = () => {
             <div>
                 <h3 className="small-semibold mb-4">Recommendations</h3>
                 <div className="flex gap-3 flex-wrap">
-                    <div className="px-4 py-2 rounded-full bg-dark-4 small-medium">UI/UX</div>
-                    <div className="px-4 py-2 rounded-full bg-primary-500 small-medium">Music</div>
-                    <div className="px-4 py-2 rounded-full bg-dark-4 small-medium">Cooking</div>
-                    <div className="px-4 py-2 rounded-full bg-dark-4 small-medium">Hiking</div>
+                    <Button
+                        onClick={() => setActive("UI/UX")}
+                        className={`px-4 py-2 rounded-full small-medium transition ${active === "UI/UX" ? "bg-primary-500" : "bg-dark-4 hover:bg-dark-3"}`}
+                    >
+                        UI/UX
+                    </Button>
+
+                    <Button
+                        onClick={() => setActive("Music")}
+                        className={`px-4 py-2 rounded-full small-medium transition ${active === "Music" ? "bg-primary-500" : "bg-dark-4 hover:bg-dark-3"}`}
+                    >
+                        Music
+                    </Button>
+
+                    <Button
+                        onClick={() => setActive("Cooking")}
+                        className={`px-4 py-2 rounded-full small-medium transition ${active === "Cooking" ? "bg-primary-500" : "bg-dark-4 hover:bg-dark-3"}`}
+                    >
+                        Cooking
+                    </Button>
+
+                    <Button
+                        onClick={() => setActive("Hiking")}
+                        className={`px-4 py-2 rounded-full small-medium transition ${active === "Hiking" ? "bg-primary-500" : "bg-dark-4 hover:bg-dark-3"}`}
+                    >
+                        Hiking
+                    </Button>
                 </div>
             </div>
 

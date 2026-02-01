@@ -7,7 +7,7 @@ export default function NotFound() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const t = setTimeout(() => navigate("/"), 7000);
+        const t = setTimeout(() => navigate("/sigin"), 7000);
         return () => clearTimeout(t);
     }, [navigate]);
 
@@ -61,20 +61,20 @@ export default function NotFound() {
                 </p>
 
                 <p className="tiny-medium text-light-4 mt-2">
-                    Redirecting you home…
+                    Redirecting you Sigin
                 </p>
 
                 <motion.button
                     whileHover={{ scale: 1.06 }}
                     whileTap={{ scale: 0.95 }}
-                    onClick={() => navigate("/")}
+                    onClick={() => navigate("/sigin")}
                     className="mt-8 px-8 py-3 rounded-full
             bg-dark-4 border border-dark-4
             hover:bg-primary-500
             transition-all
             base-medium"
                 >
-                    Go Home →
+                    Go Sigin →
                 </motion.button>
             </motion.div>
         </div>

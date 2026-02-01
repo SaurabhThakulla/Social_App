@@ -17,7 +17,7 @@ const Sidebar = () => {
     return (
         <aside
             className={`bg-dark-2 h-screen transition-all duration-300
-      ${open ? "w-64" : "w-16"} flex flex-col`}
+      ${open ? "w-auto" : "w-16"} flex flex-col`}
         >
             {/* Profile / Hamburger */}
             <button

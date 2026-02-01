@@ -1,12 +1,15 @@
+import Navbar from "@/components/shared/Navbar";
 import { Home, Profile, Stories  } from "./pages";
-import AppSidebar from "@/components/AppSidebar";
+import AppSidebar from "@/components/shared/AppSidebar";
 
 const RootLayout = () => {
   const profile = false;
   return(
-    <div className="grid grid-cols-1 md:grid-cols-[1fr_3fr_1fr] min-h-screen">
+    <div className="grid grid-cols-[0.3fr_2fr]  md:grid-cols-[0.5fr_3.4fr_1fr] min-h-screen">
       <AppSidebar />
-      {!profile ? <Home /> : <Profile />}
+      <Navbar>
+        {!profile ? <Home /> : <Profile />}
+     </Navbar>
       <Stories/>
     </div>
 

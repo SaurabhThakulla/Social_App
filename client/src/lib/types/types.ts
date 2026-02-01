@@ -4,15 +4,16 @@ export type User = {
     avatar?: string;
 };
 export type Post = {
-  id: string;
-  authorId: string;
-  content: string;
-  createdAt: string;
-  metrics: {
-    likes: number;
-    comments: number;
-    shares: number;
-  };
+    id: string;
+    authorId: string;
+    content: string;
+    createdAt: string;
+    image: string;
+    metrics: {
+        likes: number;
+        comments: number;
+        shares: number;
+    };
 };
 export type Story = {
     id: string;

@@ -1,9 +1,8 @@
 import { usePosts } from "@/api/queries/index";
+import FeedLoader from "@/components/ui/feed";
 
 const Home = () => {
   const { data: posts, isLoading } = usePosts();
-  const result = usePosts();
-  console.log(result);
 
   const formatDate = (date: string | number | Date) =>
     new Date(date).toLocaleDateString("en-IN", {
@@ -11,9 +10,13 @@ const Home = () => {
       month: "short",
       year: "numeric",
     });
-  
+
   if (isLoading) {
-    return <p className="text-center mt-6">Loading feed...</p>;
+    return (
+      <div className="mt-6">
+        <FeedLoader />
+      </div>
+    );
   }
 
   if (!posts || posts.length === 0) {
@@ -32,14 +35,12 @@ const Home = () => {
   return (
     <section className="home-container">
       <div className="home-posts mx-auto">
-        {/* Feed Header */}
-        <h1 className="h2-bold w-full text-left">Feed</h1>
-
-        {posts?.map((e) => {
-          const { authorId, content, createdAt, metrics } = e;
+        {posts.map((e) => {
+          const { authorId, content, createdAt, metrics, image } = e;
 
           return (
-            <div key={e.id}>
+            <div key={e.id} className="mb-6">
+              {/* Header */}
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-9 h-9 rounded-full bg-gray-300 flex items-center justify-center font-semibold">
                   {authorId?.[0] || "U"}
@@ -51,6 +52,15 @@ const Home = () => {
                   </p>
                 </div>
               </div>
+
+              {/* Image */}
+              {image && (
+                <img
+                  src={image}
+                  alt="post"
+                  className="w-full h-90 object-cover rounded-xl mb-3"
+                />
+              )}
 
               {/* Content */}
               <p className="base-regular mb-4">{content}</p>
@@ -67,11 +77,9 @@ const Home = () => {
                   🔄 {metrics?.shares || 0}
                 </button>
               </div>
-            </div>       
-          )
-
+            </div>
+          );
         })}
-
       </div>
     </section>
   );

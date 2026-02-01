@@ -53,127 +53,97 @@
   },
 
   "posts": [
-    {
-      "id": "post_001",
-      "authorId": "usr_001",
-      "content": "late night thoughts 🌙",
-      "createdAt": "2026-01-31T21:10:00Z",
-      "visibility": "public",
-      "metrics": {
-        "likes": 12,
-        "comments": 3,
-        "shares": 1
-      }
-    },
-    {
-      "id": "post_002",
-      "authorId": "usr_002",
-      "content": "quiet days hit different",
-      "createdAt": "2026-01-31T20:55:00Z",
-      "visibility": "public",
-      "metrics": {
-        "likes": 8,
-        "comments": 1,
-        "shares": 0
-      }
-    },
-    {
-      "id": "post_003",
-      "authorId": "usr_003",
-      "content": "music feels louder at night",
-      "createdAt": "2026-01-31T20:30:00Z",
-      "visibility": "public",
-      "metrics": {
-        "likes": 20,
-        "comments": 5,
-        "shares": 4
-      }
-    },
-    {
-      "id": "post_004",
-      "authorId": "usr_004",
-      "content": "healing isn’t linear",
-      "createdAt": "2026-01-31T20:05:00Z",
-      "visibility": "public",
-      "metrics": {
-        "likes": 15,
-        "comments": 2,
-        "shares": 1
-      }
-    },
-    {
-      "id": "post_005",
-      "authorId": "usr_005",
-      "content": "black screens feel safe",
-      "createdAt": "2026-01-31T19:40:00Z",
-      "visibility": "public",
-      "metrics": {
-        "likes": 18,
-        "comments": 4,
-        "shares": 2
-      }
-    },
-    {
-      "id": "post_006",
-      "authorId": "usr_006",
-      "content": "today felt unreal",
-      "createdAt": "2026-01-31T19:10:00Z",
-      "visibility": "public",
-      "metrics": {
-        "likes": 6,
-        "comments": 0,
-        "shares": 0
-      }
-    },
-    {
-      "id": "post_007",
-      "authorId": "usr_007",
-      "content": "minimal words, deep meaning",
-      "createdAt": "2026-01-31T18:50:00Z",
-      "visibility": "public",
-      "metrics": {
-        "likes": 9,
-        "comments": 1,
-        "shares": 1
-      }
-    },
-    {
-      "id": "post_008",
-      "authorId": "usr_008",
-      "content": "why does silence feel heavy?",
-      "createdAt": "2026-01-31T18:20:00Z",
-      "visibility": "public",
-      "metrics": {
-        "likes": 11,
-        "comments": 3,
-        "shares": 0
-      }
-    },
-    {
-      "id": "post_009",
-      "authorId": "usr_009",
-      "content": "thinking too much again",
-      "createdAt": "2026-01-31T17:55:00Z",
-      "visibility": "public",
-      "metrics": {
-        "likes": 7,
-        "comments": 2,
-        "shares": 0
-      }
-    },
-    {
-      "id": "post_010",
-      "authorId": "usr_010",
-      "content": "offline but thinking",
-      "createdAt": "2026-01-31T17:20:00Z",
-      "visibility": "public",
-      "metrics": {
-        "likes": 5,
-        "comments": 0,
-        "shares": 0
-      }
-    }
-  ],
+  {
+    "id": "post_001",
+    "authorId": "usr_001",
+    "content": "late night thoughts 🌙",
+    "image": "https://picsum.photos/seed/post001/600/400",
+    "createdAt": "2026-01-31T21:10:00Z",
+    "visibility": "public",
+    "metrics": { "likes": 12, "comments": 3, "shares": 1 }
+  },
+  {
+    "id": "post_002",
+    "authorId": "usr_002",
+    "content": "quiet days hit different",
+    "image": "https://picsum.photos/seed/post002/600/400",
+    "createdAt": "2026-01-31T20:55:00Z",
+    "visibility": "public",
+    "metrics": { "likes": 8, "comments": 1, "shares": 0 }
+  },
+  {
+    "id": "post_003",
+    "authorId": "usr_003",
+    "content": "music feels louder at night",
+    "image": "https://picsum.photos/seed/post003/600/400",
+    "createdAt": "2026-01-31T20:30:00Z",
+    "visibility": "public",
+    "metrics": { "likes": 20, "comments": 5, "shares": 4 }
+  },
+  {
+    "id": "post_004",
+    "authorId": "usr_004",
+    "content": "healing isn’t linear",
+    "image": "https://picsum.photos/seed/post004/600/400",
+    "createdAt": "2026-01-31T20:05:00Z",
+    "visibility": "public",
+    "metrics": { "likes": 15, "comments": 2, "shares": 1 }
+  },
+  {
+    "id": "post_005",
+    "authorId": "usr_005",
+    "content": "black screens feel safe",
+    "image": "https://picsum.photos/seed/post005/600/400",
+    "createdAt": "2026-01-31T19:40:00Z",
+    "visibility": "public",
+    "metrics": { "likes": 18, "comments": 4, "shares": 2 }
+  },
+  {
+    "id": "post_006",
+    "authorId": "usr_006",
+    "content": "today felt unreal",
+    "image": "https://picsum.photos/seed/post006/600/400",
+    "createdAt": "2026-01-31T19:10:00Z",
+    "visibility": "public",
+    "metrics": { "likes": 6, "comments": 0, "shares": 0 }
+  },
+  {
+    "id": "post_007",
+    "authorId": "usr_007",
+    "content": "minimal words, deep meaning",
+    "image": "https://picsum.photos/seed/post007/600/400",
+    "createdAt": "2026-01-31T18:50:00Z",
+    "visibility": "public",
+    "metrics": { "likes": 9, "comments": 1, "shares": 1 }
+  },
+  {
+    "id": "post_008",
+    "authorId": "usr_008",
+    "content": "why does silence feel heavy?",
+    "image": "https://picsum.photos/seed/post008/600/400",
+    "createdAt": "2026-01-31T18:20:00Z",
+    "visibility": "public",
+    "metrics": { "likes": 11, "comments": 3, "shares": 0 }
+  },
+  {
+    "id": "post_009",
+    "authorId": "usr_009",
+    "content": "thinking too much again",
+    "image": "https://picsum.photos/seed/post009/600/400",
+    "createdAt": "2026-01-31T17:55:00Z",
+    "visibility": "public",
+    "metrics": { "likes": 7, "comments": 2, "shares": 0 }
+  },
+  {
+    "id": "post_010",
+    "authorId": "usr_010",
+    "content": "offline but thinking",
+    "image": "https://picsum.photos/seed/post010/600/400",
+    "createdAt": "2026-01-31T17:20:00Z",
+    "visibility": "public",
+    "metrics": { "likes": 5, "comments": 0, "shares": 0 }
+  }
+],
 
   "stories": [
     { "id": "story_001", "userId": "usr_001", "expiresAt": "2026-02-01T21:10:00Z" },

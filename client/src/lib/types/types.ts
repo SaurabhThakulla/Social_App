@@ -21,7 +21,4 @@ export type Story = {
     userId: string;
     expiresAt: string;
 };
-export type Suggestion = {
-    id: string;
-    username: string;
-};
+

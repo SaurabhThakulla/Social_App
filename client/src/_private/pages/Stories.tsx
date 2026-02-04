@@ -1,17 +1,16 @@
+import { usePosts, useStories } from "@/api/queries";
 import { Button } from "@/components/ui/button";
 import TagLoader from "@/components/ui/tag-loader";
 import { useTag } from "@/context/TagProvider";
+import type { Post } from "@/types";
 
 type StoriesProps = {
-    posts: {
-        id: string;
-        tag: string;
-    }[];
+    posts: Post[];
 };
 
 const Stories = ({ posts }: StoriesProps) => {
+    
     const { activeTag, setActiveTag } = useTag();
-
     // unique tags from posts
     const uniqueTags = [...new Set(posts.map((p) => p.tag))];
     if (!posts || posts.length === 0) {
@@ -47,7 +46,12 @@ const Stories = ({ posts }: StoriesProps) => {
                 <h3 className="small-semibold mb-4">Suggestions</h3>
 
                 <div className="flex-between mb-3">
-                    <div className="flex-start gap-3">
+                   
+                    
+
+
+
+                    {/* <div className="flex-start gap-3">
                         <div className="h-8 w-8 rounded-full bg-primary-500 flex-center text-xs font-bold">
                             NS
                         </div>
@@ -56,22 +60,16 @@ const Stories = ({ posts }: StoriesProps) => {
 
                     <Button className="shad-button_dark_4 rounded-full small-medium px-3">
                         Sync
-                    </Button>
+                    </Button> */}
+
+
+
+
+
+
+
+
                 </div>
-
-                <div className="flex-between mb-3">
-                    <div className="flex-start gap-3">
-                        <div className="h-8 w-8 rounded-full bg-dark-4 flex-center text-xs font-bold">
-                            BL
-                        </div>
-                        <p className="small-medium">Brittni Lando</p>
-                    </div>
-
-                    <Button className="shad-button_dark_4 rounded-full small-medium px-3">
-                        Sync
-                    </Button>
-                </div>
-
                 <p className="tiny-medium text-light-4 cursor-pointer">See all</p>
             </div>
 

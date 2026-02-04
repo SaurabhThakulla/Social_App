@@ -166,18 +166,5 @@
     { "id": "story_008", "userId": "usr_008", "expiresAt": "2026-02-01T18:20:00Z" },
     { "id": "story_009", "userId": "usr_009", "expiresAt": "2026-02-01T17:55:00Z" },
     { "id": "story_010", "userId": "usr_010", "expiresAt": "2026-02-01T17:20:00Z" }
-  ],
-
-  "suggestions": [
-    { "id": "usr_011", "username": "NickShelburne" },
-    { "id": "usr_012", "username": "BrittniLando" },
-    { "id": "usr_013", "username": "AidenRoss" },
-    { "id": "usr_014", "username": "MayaChen" },
-    { "id": "usr_015", "username": "LeoCarter" },
-    { "id": "usr_016", "username": "NinaPatel" },
-    { "id": "usr_017", "username": "EvanBrooks" },
-    { "id": "usr_018", "username": "SofiaMiles" },
-    { "id": "usr_019", "username": "RyanWolfe" },
-    { "id": "usr_020", "username": "IrisMoon" }
   ]
 }

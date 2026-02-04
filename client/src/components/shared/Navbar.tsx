@@ -21,6 +21,9 @@ export const Navbar = ({ children }: NavbarProps) => {
                         <li className="small-medium text-light-4 hover:text-white cursor-pointer transition">
                             Leaderboards
                         </li>
+                        <li className="small-medium text-light-4 hover:text-white cursor-pointer transition">
+                            Message
+                        </li>
                     </ul>
                 </div>
             </nav>

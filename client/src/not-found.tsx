@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import logo from "/assets/images/logo.png";
+import logo from "/assets/images/logo.svg";
 
 export default function NotFound() {
     const navigate = useNavigate();
@@ -49,7 +49,7 @@ export default function NotFound() {
                     initial={{ scale: 0.8, rotate: -8 }}
                     animate={{ scale: 1, rotate: 0 }}
                     transition={{ duration: 0.6 }}
-                    className="w-20 h-20 mb-6 drop-shadow-[0_0_40px_rgba(168,85,247,0.8)]"
+                    className="w-40 h-40 mb-6 drop-shadow-[0_0_40px_rgba(168,85,247,0.8)]"
                 />
 
                 <h1 className="h2-bold mb-2">

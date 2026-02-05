@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import logo from "/assets/images/logo.png";
+import logo from "/assets/images/logo.svg";
 import {
   Form,
   FormControl,

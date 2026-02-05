@@ -11,7 +11,6 @@ type StoriesProps = {
 const Stories = ({ posts }: StoriesProps) => {
     
     const { activeTag, setActiveTag } = useTag();
-    // unique tags from posts
     const uniqueTags = [...new Set(posts.map((p) => p.tag))];
     if (!posts || posts.length === 0) {
         return <TagLoader />;

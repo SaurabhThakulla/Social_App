@@ -1,5 +1,5 @@
 import { usePosts } from "@/api/queries/index";
-import FeedLoader from "@/components/ui/feed";
+import FeedLoader from "@/components/skeltons/feed";
 import { useTag } from "@/context/TagProvider";
 
 
@@ -20,16 +20,10 @@ const Home = () => {
       month: "short",
       year: "numeric",
     });
+  
+  if (isLoading) return <FeedLoader />;
+  if (!posts?.length) return <p className="flex h-full w-full justify-center items-center">No posts found</p>;
 
-  if (isLoading) {
-    return (
-      <section className="home-container">
-        <div className="w-full">
-          <FeedLoader />
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section className="home-container">

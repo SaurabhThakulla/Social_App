@@ -31,21 +31,6 @@ const Home = () => {
     );
   }
 
-
-
-  if (!posts || posts.length === 0) {
-    return (
-      <section className="home-container">
-        <div className="home-posts mx-auto text-center">
-          <h2 className="h2-bold">No posts yet</h2>
-          <p className="base-regular text-gray-500">
-            Start sharing something
-          </p>
-        </div>
-      </section>
-    );
-  }
-
   return (
     <section className="home-container">
       <div className="home-posts mx-auto">

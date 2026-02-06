@@ -1,4 +1,5 @@
 import { usePosts, useStories } from "@/api/queries";
+import { Recomendation } from "@/components/skeltons/recomendation";
 import { Button } from "@/components/ui/button";
 import TagLoader from "@/components/ui/tag-loader";
 import { useTag } from "@/context/TagProvider";
@@ -9,7 +10,7 @@ type StoriesProps = {
 };
 
 const Stories = ({ posts }: StoriesProps) => {
-    
+
     const { activeTag, setActiveTag } = useTag();
     const uniqueTags = [...new Set(posts.map((p) => p.tag))];
     if (!posts || posts.length === 0) {
@@ -45,8 +46,8 @@ const Stories = ({ posts }: StoriesProps) => {
                 <h3 className="small-semibold mb-4">Suggestions</h3>
 
                 <div className="flex-between mb-3">
-                   
-                    
+
+
 
 
 
@@ -73,26 +74,24 @@ const Stories = ({ posts }: StoriesProps) => {
             </div>
 
             {/* Recommendations */}
-            <div>
-                <h3 className="small-semibold mb-4">Recommendations</h3>
+            {uniqueTags ? (
+                <div>
+                    <h3 className="small-semibold mb-4">Recommendations</h3>
 
-                <div className="flex gap-3 flex-wrap">
-                    {uniqueTags.map(function (tag) {
-                        return (
-                            <Button
-                                key={tag}
-                                onClick={() =>
-                                    setActiveTag(activeTag === tag ? null : tag)
-                                }
-                                className={`px-4 py-2 rounded-full small-medium transition ${activeTag === tag ? "bg-primary-500": "bg-dark-4 hover:bg-dark-3"}`}
-                            >
-                                {tag}
-                            </Button>
-                        );
-                    })}
+                    <div className="flex gap-3 flex-wrap">
+                        {[...Array(4)].map( (_,i)=>{
+                            return (
+                                <Button
+                                    key={i}
+                                    className={`px-4 py-2 rounded-full small-medium transition ${activeTag === tag ? "bg-primary-500" : "bg-dark-4 hover:bg-dark-3"}`}
+                                >
+                                   ---
+                                </Button>
+                            );
+                        })}
+                    </div>
                 </div>
-            </div>
-
+            ) : (<Recomendation />)}
         </aside>
     );
 };

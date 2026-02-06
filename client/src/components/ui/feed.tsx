@@ -23,7 +23,7 @@ function FeedLoader() {
           </div>
 
           {/* Image */}
-          <div className="h-64 bg-dark-4 rounded-xl" />
+          <div className="h-[30vh] w-[40vw] bg-dark-4 rounded-xl" />
 
           {/* Actions */}
           <div className="flex gap-6">

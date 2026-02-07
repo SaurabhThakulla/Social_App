@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import "./global.css";
 import Signin from "./_public/forms/Signin";
-import { Home } from "./_private/pages";
+import { Home, Profile } from "./_private/pages";
 import Signup from "./_public/forms/Signup";
 import AuthLayout from "./_public/AuthLayout";
 import RootLayout from "./_private/RootLayout";
@@ -18,6 +18,7 @@ const App = () => {
         {/* Private Routes */}
         <Route element={<RootLayout />}>
           <Route path="/home" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

@@ -4,7 +4,7 @@ import AppSidebar from "@/components/shared/AppSidebar";
 import { usePosts } from "@/api/queries";
 
 const RootLayout = () => {
-  const profile = false;
+  const profile = true;
   const { data: posts } = usePosts();
 
   return(

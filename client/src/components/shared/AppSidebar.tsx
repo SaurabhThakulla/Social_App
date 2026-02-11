@@ -1,3 +1,5 @@
+import { Link, useNavigate } from "react-router-dom";
+
 const Sidebar = () => {
     const user = {
         name: "Aura User",
@@ -12,10 +14,13 @@ const Sidebar = () => {
         .toUpperCase();
 
 
+    const navigate = useNavigate();
+    
     return (
         <aside className="leftsidebar">
             {/* Profile */}
-            <div className="flex items-center gap-3 mb-10">
+            <div className="flex items-center gap-3 mb-10 cursor-pointer"
+                onClick={() => navigate("/profile")}>
                 {user.avatar ? (
                     <img
                         src={user.avatar}
@@ -36,10 +41,21 @@ const Sidebar = () => {
 
             {/* Navigation */}
             <nav className="flex flex-col gap-2">
-                <SidebarItem  label="Home" />
-                <SidebarItem label="Explore" />
-                <SidebarItem label="Profile" />
-                <SidebarItem label="Settings" />
+                <Link to="/home">
+                    <SidebarItem label="Home" />
+                </Link>
+
+                <Link to="/explore">
+                    <SidebarItem label="Explore" />
+                </Link>
+
+                <Link to="/profile">
+                    <SidebarItem label="Profile" />
+                </Link>
+
+                <Link to="/settings">
+                    <SidebarItem label="Settings" />
+                </Link>
             </nav>
         </aside>
     );

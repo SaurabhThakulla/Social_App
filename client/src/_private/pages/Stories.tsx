@@ -11,7 +11,7 @@ type StoriesProps = {
 };
 
 const Stories = ({ posts }: StoriesProps) => {
-    const stories = true;
+    const stories = false;
     const { activeTag, setActiveTag } = useTag();
     const uniqueTags = [...new Set(posts.map((p) => p.tag))];
 

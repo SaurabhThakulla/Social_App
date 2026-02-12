@@ -1,11 +1,12 @@
 function Profile() {
+  const img = 'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=600&auto=format&fit=crop&q=80';
   return (
     <section className="profile-container">
       {/* Profile Header */}
       <div className="profile-inner_container">
         {/* Avatar */}
         <img
-          src="https://via.placeholder.com/150"
+          src={img}
           alt="profile"
           className="h-36 w-36 rounded-full object-cover border border-dark-4"
         />

@@ -6,6 +6,7 @@ import Signup from "./_public/forms/Signup";
 import AuthLayout from "./_public/AuthLayout";
 import RootLayout from "./_private/RootLayout";
 import NotFound from "./not-found";
+import Explore from "./_private/pages/Explore";
 const App = () => {
   return (
     <main className="flex h-screen">
@@ -19,6 +20,7 @@ const App = () => {
         <Route element={<RootLayout />}>
           <Route path="/home" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/explore" element={<Explore />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

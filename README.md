@@ -1,4 +1,4 @@
-About AURA
+About AURA Web app
 
 AURA is a modern social media application designed for sharing moments, thoughts, and creativity in a clean and minimal environment. It allows users to post photos, videos, and short text updates while interacting with others in a smooth and intuitive way.
 

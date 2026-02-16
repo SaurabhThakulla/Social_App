@@ -1,10 +1,9 @@
-import { usePosts, useStories } from "@/api/queries";
 import Recomendation from "@/components/skeltons/recomendation";
 import { Storiessk } from "@/components/skeltons/stories";
 import { SuggestionsSkeleton } from "@/components/skeltons/suggestions";
 import { Button } from "@/components/ui/button";
 import { useTag } from "@/context/TagProvider";
-import type { Post } from "@/types";
+import type { Post } from "@/lib/types/types";
 
 type StoriesProps = {
     posts: Post[];

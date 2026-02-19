@@ -1,4 +1,5 @@
 import React from "react";
+import NotificationIcon from "../ui/notification";
 
 type NavbarProps = {
     children: React.ReactNode;
@@ -23,6 +24,9 @@ export const Navbar = ({ children }: NavbarProps) => {
                         </li>
                         <li className="small-medium text-light-4 hover:text-white cursor-pointer transition">
                             Message
+                        </li>
+                        <li className="ml-auto">
+                            <NotificationIcon/>
                         </li>
                     </ul>
                 </div>

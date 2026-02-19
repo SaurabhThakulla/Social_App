@@ -302,6 +302,56 @@
       "savedAt": "2026-02-01T10:35:00Z",
       "tag": "Life"
     }
+  ],
+  "notification": [
+    {
+      "id": 1,
+      "user": {
+        "id": "u101",
+        "name": "Rahul Sharma",
+        "avatar": "https://randomuser.me/api/portraits/men/32.jpg"
+      },
+      "type": "like",
+      "message": "liked your post",
+      "isRead": false,
+      "createdAt": "2026-02-18T10:30:00Z"
+    },
+    {
+      "id": 2,
+      "user": {
+        "id": "u102",
+        "name": "Ananya Singh",
+        "avatar": "https://randomuser.me/api/portraits/women/44.jpg"
+      },
+      "type": "comment",
+      "message": "commented: \"Nice shot 🔥\"",
+      "isRead": false,
+      "createdAt": "2026-02-18T09:15:00Z"
+    },
+    {
+      "id": 3,
+      "user": {
+        "id": "u103",
+        "name": "Vikram Patel",
+        "avatar": "https://randomuser.me/api/portraits/men/65.jpg"
+      },
+      "type": "follow",
+      "message": "started following you",
+      "isRead": true,
+      "createdAt": "2026-02-17T18:20:00Z"
+    },
+    {
+      "id": 4,
+      "user": {
+        "id": "u104",
+        "name": "Priya Kapoor",
+        "avatar": "https://randomuser.me/api/portraits/women/12.jpg"
+      },
+      "type": "like",
+      "message": "liked your photo",
+      "isRead": true,
+      "createdAt": "2026-02-17T14:05:00Z"
+    }
   ]
 }
 

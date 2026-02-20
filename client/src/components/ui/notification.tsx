@@ -5,7 +5,7 @@ import { Button } from "./button";
 function NotificationIcon() {
     const [open, setOpen] = useState(false);
     const noti = true; 
-    const [read, setRead ]= useState(false)
+    const [read, setRead ]= useState(true)
     const [unread, setUnread ]= useState(false)
 
     return (

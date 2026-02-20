@@ -1,15 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import {
+    getnoti,
     getPosts,
     getStories,
     getSuggestions,
-    getUsers
+    getUsers,
 } from "@/api/api";
 import { shuffleArray } from "@/lib/hooks/shuffle";
-import type { Post } from "@/lib/types/types";
-import type { Story } from "@/lib/types/types";
-import type { Suggestion } from "@/lib/types/types";
-import type { User } from "@/lib/types/types";
+import type { Noti, Post, Story, Suggestion, User } from "@/lib/types/types";
 
 export const usePosts = () => {
     return useQuery<Post[]>({
@@ -40,5 +38,12 @@ export const useUsers = () => {
         queryKey: ['users'],
         queryFn: getUsers,
         select: (data) => shuffleArray(data)
+    })
+}
+
+export const useNoti = () => {
+    return useQuery<Noti[]>({
+        queryKey: ['noti'],
+        queryFn: getnoti,
     })
 }

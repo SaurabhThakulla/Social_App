@@ -22,3 +22,14 @@ export type Story = {
     expiresAt: string;
 };
 
+export type Noti = {
+    id: string;
+    user: {
+        name: string;
+        avatar: string;
+    }
+    type: string;
+    message: string;
+    isRead: boolean;
+    createdAt: string;
+}

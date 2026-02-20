@@ -35,7 +35,12 @@ export const getTags = async () => {
     return res.json();
 };
 
-
+//Notifications
+export const getnoti = async () => {
+    const res = await fetch(`${BASE_URL}/notification`);
+    if (!res.ok) throw new Error("Failed to fetch Notification");
+    return res.json();
+}
 
 
 // npx json-server --watch src/api/data.json --port 3000

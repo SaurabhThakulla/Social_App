@@ -25,12 +25,12 @@ function NotificationIcon() {
             {/* Dropdown */}
             {open && (
                 <div className="absolute right-30 mt-3 w-[30rem] bg-dark-2 border border-dark-4 rounded-md shadow-lg p-6 z-50">
-                    <div className="mb-1">
-                        <p className="small-semibold mb-1">Notifications</p>
+                    <div>
+                        <p className="small-semibold mb-[0.25rem]">Notifications</p>
                         <Button onClick={() => {
                             setUnread(false);
                             setRead(true);
-                        }} className={`${read ? "bg-primary-600" : "bg-light-2"} text-black mr-3 mb-2`}>
+                        }} className={`${read ? "bg-primary-600" : "bg-light-2"} text-black mr-3 mb-[0.25rem] mt-[0.25rem]`}>
                             All
                         </Button>
                         <Button onClick={() => {

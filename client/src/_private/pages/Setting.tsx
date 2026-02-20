@@ -46,23 +46,7 @@ function Settings() {
 
                 <div className="flex justify-between items-center">
                     <span>Private Account</span>
-                    <input type="checkbox" className="w-5 h-5" />
-                </div>
-            </div>
-
-            {/* Notifications Section */}
-            <div className="bg-zinc-900 rounded-xl p-4 mb-6">
-                <h2 className="text-lg font-semibold mb-3">Notifications</h2>
-
-                <div className="flex justify-between items-center mb-2">
-                    <span>Email Notifications</span>
-                    <input type="checkbox" className="w-5 h-5" />
-                </div>
-
-                <div className="flex justify-between items-center">
-                    <span>Push Notifications</span>
-                    <input type="checkbox" className="w-5 h-5" />
-                </div>
+               </div>
             </div>
 
             {/* Logout */}

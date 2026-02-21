@@ -139,15 +139,15 @@ html, body {
 
   /* Home */
   .home-container {
-    @apply flex flex-col flex-1 items-center gap-10 overflow-scroll py-10 px-5 md:px-8 lg:p-4 custom-scrollbar;
+    @apply flex flex-col flex-1 items-center gap-10 overflow-scroll px-5 md:px-8 lg:p-4 custom-scrollbar;
   }
 
   .home-posts {
-    @apply max-w-[900px] flex flex-col w-full gap-6 md:gap-9;
+    @apply max-w-[900px] flex flex-col w-full gap-6;
   }
 
   .home-creators {
-    @apply hidden md:flex flex-col w-72 2xl:w-465 px-6 py-10 gap-10  overflow-scroll custom-scrollbar;
+    @apply hidden md:flex flex-col w-72 2xl:w-465 px-6 py-10 gap-10 custom-scrollbar;
   }
 
   /* Post Details */

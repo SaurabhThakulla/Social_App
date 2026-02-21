@@ -15,8 +15,6 @@ const Stories = ({ posts }: StoriesProps) => {
     const { activeTag, setActiveTag } = useTag();
     const uniqueTags = [...new Set(posts.map((p) => p.tag))];
     return (
-        <aside>
-
             <aside className="home-creators">
 
                 {/* Stories */}
@@ -26,7 +24,7 @@ const Stories = ({ posts }: StoriesProps) => {
                     <>
                         <h3 className="small-semibold mb-4">Stories</h3>
 
-                        <div className="flex gap-4">
+                        <div className="flex gap-4 overflow-y-auto custom-scrollbar pb-3">
                             {stories?.map(function (e) {
                                 return (
                                     <div key={e._id} className="flex flex-col items-center gap-2">
@@ -42,12 +40,6 @@ const Stories = ({ posts }: StoriesProps) => {
                         </div>
                     </>
                 )}
-
-            </aside>
-
-
-
-
             {/* SUGGESTIONS */}
             <SuggestionsSkeleton/>
 

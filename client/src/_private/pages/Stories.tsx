@@ -1,3 +1,4 @@
+import { useStories } from "@/api/queries";
 import Recomendation from "@/components/skeltons/recomendation";
 import { Storiessk } from "@/components/skeltons/stories";
 import { SuggestionsSkeleton } from "@/components/skeltons/suggestions";
@@ -10,37 +11,39 @@ type StoriesProps = {
 };
 
 const Stories = ({ posts }: StoriesProps) => {
-    const stories = false;
+    const { data: stories, isLoading } = useStories();
     const { activeTag, setActiveTag } = useTag();
     const uniqueTags = [...new Set(posts.map((p) => p.tag))];
-
     return (
-        <aside className="home-creators">
+        <aside>
 
-            {/* Stories */}
-            {stories ? (
-                <Storiessk />
-            ) : (
-                <div>
-                    <h3 className="small-semibold mb-4">Stories</h3>
+            <aside className="home-creators">
 
-                    <div className="flex gap-4">
-                        <div className="flex flex-col items-center gap-2">
-                            <div className="h-14 w-14 rounded-full bg-primary-500 flex-center text-sm font-bold">
-                                AP
-                            </div>
-                            <p className="tiny-medium text-light-4">Anatoly</p>
+                {/* Stories */}
+                {isLoading ? (
+                    <Storiessk />
+                ) : (
+                    <>
+                        <h3 className="small-semibold mb-4">Stories</h3>
+
+                        <div className="flex gap-4">
+                            {stories?.map(function (e) {
+                                return (
+                                    <div key={e._id} className="flex flex-col items-center gap-2">
+                                        <div className="h-14 w-14 rounded-full bg-primary-500 flex-center text-sm font-bold">
+                                            {e.userId[0]}
+                                        </div>
+                                        <p className="tiny-medium text-light-4">
+                                            {e.userId}
+                                        </p>
+                                    </div>
+                                );
+                            })}
                         </div>
+                    </>
+                )}
 
-                        <div className="flex flex-col items-center gap-2">
-                            <div className="h-14 w-14 rounded-full bg-dark-4 flex-center text-sm font-bold">
-                                LE
-                            </div>
-                            <p className="tiny-medium text-light-4">Lolita</p>
-                        </div>
-                    </div>
-                </div>
-            )}
+            </aside>
 
 
 

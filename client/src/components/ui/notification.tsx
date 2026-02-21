@@ -3,6 +3,7 @@ import { Bell } from "lucide-react";
 import { Button } from "./button";
 import { useNoti } from "@/api/queries/index";
 import { NotificationSkeleton } from "../skeltons/notification";
+import { formatDistanceToNow } from "date-fns";
 
 function NotificationIcon() {
     const [filter, setFilter] = useState<"all" | "unread">("all");
@@ -30,7 +31,11 @@ function NotificationIcon() {
             {/* Dropdown */}
             {open &&(    
                          
-                <div className="absolute right-30 mt-3 w-[30rem] bg-dark-2 border border-dark-4 rounded-md shadow-lg p-6 z-50 overflow-y-scroll custom-scrollbar">
+                <div className="absolute right-0 mt-3 w-[30rem] bg-dark-2 border border-dark-4 rounded-3xl shadow-lg p-6 z-50 overflow-y-scroll custom-scrollbar">
+                    {isLoading ? (
+                           <NotificationSkeleton />
+                    ) : (
+                            <>
                     <div>
                         <p className="small-semibold mb-[0.25rem]">Notifications</p>
                         <Button
@@ -49,7 +54,10 @@ function NotificationIcon() {
                     <div>
                         <div className="flex flex-col custom-scrollbar max-h-72 overflow-y-auto">
                             {filteredNoti?.map((e) => {
-                                const { id, user, type, isRead } = e;
+                                const { id, user, type, isRead, createdAt } = e;
+                                const timeAgo = formatDistanceToNow(new Date(createdAt), {
+                                    addSuffix: true,
+                                });
                                 return (
                                     <div
                                         key={id}
@@ -77,7 +85,7 @@ function NotificationIcon() {
                                                 }
                                             </p>
                                             <p className="tiny-medium text-light-4 mt-1">
-                                                2h ago
+                                                {timeAgo}
                                             </p>
                                         </div>
 
@@ -89,7 +97,9 @@ function NotificationIcon() {
                                 );
                             })}
                         </div>
-                    </div>
+                                </div>
+                            </>
+                    )}
                 </div>
             )}
         </div>

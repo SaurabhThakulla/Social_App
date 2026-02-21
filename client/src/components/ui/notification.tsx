@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Bell } from "lucide-react";
 import { Button } from "./button";
 import { useNoti } from "@/api/queries/index";
+import { NotificationSkeleton } from "../skeltons/notification";
 
 function NotificationIcon() {
     const [filter, setFilter] = useState<"all" | "unread">("all");
@@ -11,9 +12,6 @@ function NotificationIcon() {
         filter === "unread"
             ? noti?.filter((n) => !n.isRead)
             : noti;
-    if (isLoading) {
-        return <p className="text-center mt-10">Loading...</p>;
-    }
 
     return (
         <div className="relative cursor-pointer">
@@ -30,7 +28,8 @@ function NotificationIcon() {
             )}
 
             {/* Dropdown */}
-            {open && (
+            {open &&(    
+                         
                 <div className="absolute right-30 mt-3 w-[30rem] bg-dark-2 border border-dark-4 rounded-md shadow-lg p-6 z-50 overflow-y-scroll custom-scrollbar">
                     <div>
                         <p className="small-semibold mb-[0.25rem]">Notifications</p>
@@ -99,31 +98,3 @@ function NotificationIcon() {
 
 export default NotificationIcon;
 
-
-
-
-
-                            // {/* Read Notification */}
-                            // <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-dark-3 transition cursor-pointer">
-                            //     <div className="w-9 h-9 rounded-full bg-dark-4 flex-center small-semibold text-light-1">
-                            //         VE
-                            //     </div>
-                            //     <div className="flex-1">
-                            //         <p className="small-regular text-light-1">
-                            //             <span className="small-semibold text-light-1">voidecho</span> commented on your post
-                            //         </p>
-                            //         <p className="tiny-medium text-light-4 mt-1">5h ago</p>
-                            //     </div>
-                            // </div>
-                            // {/* Follow Notification */}
-                            // <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-dark-3 transition cursor-pointer">
-                            //     <div className="w-9 h-9 rounded-full bg-dark-4 flex-center small-semibold text-light-1">
-                            //         LV
-                            //     </div>
-                            //     <div className="flex-1">
-                            //         <p className="small-regular text-light-1">
-                            //             <span className="small-semibold text-light-1">lunarvibes</span> started following you
-                            //         </p>
-                            //         <p className="tiny-medium text-light-4 mt-1">1 day ago</p>
-                            //     </div>
-                            // </div>

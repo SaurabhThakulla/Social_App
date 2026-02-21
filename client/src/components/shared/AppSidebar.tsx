@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
     const user = {
@@ -17,10 +17,13 @@ const Sidebar = () => {
     const navigate = useNavigate();
     
     return (
-        <aside className="leftsidebar">
+        <aside className="hidden min-[1020px]:flex flex-col w-64 bg-dark-2 p-6">
+
             {/* Profile */}
-            <div className="flex items-center gap-3 mb-10 cursor-pointer"
-                onClick={() => navigate("/profile")}>
+            <div
+                className="flex items-center gap-3 mb-10 cursor-pointer"
+                onClick={() => navigate("/profile")}
+            >
                 {user.avatar ? (
                     <img
                         src={user.avatar}
@@ -41,30 +44,29 @@ const Sidebar = () => {
 
             {/* Navigation */}
             <nav className="flex flex-col gap-2">
-                <Link to="/home">
-                    <SidebarItem label="Home" />
-                </Link>
-
-                <Link to="/explore">
-                    <SidebarItem label="Explore" />
-                </Link>
-
-                <Link to="/profile">
-                    <SidebarItem label="Profile" />
-                </Link>
-
-                <Link to="/settings">
-                    <SidebarItem label="Settings" />
-                </Link>
+                <SidebarItem to="/home" label="Home" />
+                <SidebarItem to="/explore" label="Explore" />
+                <SidebarItem to="/profile" label="Profile" />
+                <SidebarItem to="/settings" label="Settings" />
             </nav>
         </aside>
     );
 };
 
-const SidebarItem = ({ label }: { label: string }) => (
-    <div className="leftsidebar-link px-4 py-3 cursor-pointer">
-        {label}
-    </div>
-);
+const SidebarItem = ({ to, label }: { to: string; label: string }) => {
+    return (
+        <NavLink
+            to={to}
+            className={({ isActive }) =>
+                `px-4 py-3 rounded-lg transition ${isActive
+                    ? "bg-primary-500 text-white"
+                    : "hover:bg-dark-3 text-light-1"
+                }`
+            }
+        >
+            {label}
+        </NavLink>
+    );
+};
 
 export default Sidebar;

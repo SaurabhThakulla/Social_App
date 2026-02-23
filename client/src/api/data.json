@@ -1,56 +1,55 @@
 {
-  "users": {
-    "usr_001": {
-      "id": "usr_001",
-      "username": "auravibe",
-      "avatar": "AU"
-    },
-    "usr_002": {
-      "id": "usr_002",
-      "username": "neonmind",
-      "avatar": "NM"
-    },
-    "usr_003": {
-      "id": "usr_003",
-      "username": "voidecho",
-      "avatar": "VE"
-    },
-    "usr_004": {
-      "id": "usr_004",
-      "username": "lunarvibes",
-      "avatar": "LV"
-    },
-    "usr_005": {
-      "id": "usr_005",
-      "username": "darkmode",
-      "avatar": "DM"
-    },
-    "usr_006": {
-      "id": "usr_006",
-      "username": "orbitals",
-      "avatar": "OR"
-    },
-    "usr_007": {
-      "id": "usr_007",
-      "username": "softnoise",
-      "avatar": "SN"
-    },
-    "usr_008": {
-      "id": "usr_008",
-      "username": "midnightx",
-      "avatar": "MX"
-    },
-    "usr_009": {
-      "id": "usr_009",
-      "username": "nightlogic",
-      "avatar": "NL"
-    },
-    "usr_010": {
-      "id": "usr_010",
-      "username": "staticflow",
-      "avatar": "SF"
-    }
+"users": [
+  {
+    "id": "usr_001",
+    "username": "Arjun Verma",
+    "avatar": "https://i.pravatar.cc/150?img=1"
   },
+  {
+    "id": "usr_002",
+    "username": "Aisha Khan",
+    "avatar": "https://i.pravatar.cc/150?img=5"
+  },
+  {
+    "id": "usr_003",
+    "username": "Rohan Mehta",
+    "avatar": "https://i.pravatar.cc/150?img=8"
+  },
+  {
+    "id": "usr_004",
+    "username": "Sneha Iyer",
+    "avatar": "https://i.pravatar.cc/150?img=12"
+  },
+  {
+    "id": "usr_005",
+    "username": "Kabir Sharma",
+    "avatar": "https://i.pravatar.cc/150?img=15"
+  },
+  {
+    "id": "usr_006",
+    "username": "Meera Nair",
+    "avatar": "https://i.pravatar.cc/150?img=20"
+  },
+  {
+    "id": "usr_007",
+    "username": "Dev Malhotra",
+    "avatar": "https://i.pravatar.cc/150?img=25"
+  },
+  {
+    "id": "usr_008",
+    "username": "Tanya Roy",
+    "avatar": "https://i.pravatar.cc/150?img=30"
+  },
+  {
+    "id": "usr_009",
+    "username": "Ishaan Patel",
+    "avatar": "https://i.pravatar.cc/150?img=35"
+  },
+  {
+    "id": "usr_010",
+    "username": "Ananya Singh",
+    "avatar": "https://i.pravatar.cc/150?img=40"
+  }],
 
   "posts": [
   {

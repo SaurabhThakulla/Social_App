@@ -21,13 +21,6 @@ export const getStories = async () => {
     return res.json();
 };
 
-// Suggestions
-export const getSuggestions = async () => {
-    const res = await fetch(`${BASE_URL}/suggestions`);
-    if (!res.ok) throw new Error("Failed to fetch suggestions");
-    return res.json();
-};
-
 // Tags
 export const getTags = async () => {
     const res = await fetch(`${BASE_URL}/tags`);

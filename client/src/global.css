@@ -143,7 +143,7 @@ html, body {
   }
 
   .home-posts {
-    @apply max-w-[900px] flex flex-col w-full gap-6;
+    @apply flex flex-col w-full gap-6;
   }
 
   .home-creators {
@@ -271,7 +271,7 @@ html, body {
 
   /* Button */
   .shad-button_primary {
-    @apply bg-primary-500 hover:bg-primary-500 text-light-1 flex gap-2 !important;
+    @apply bg-primary-500 hover:bg-primary-500/80  text-light-1 flex gap-2 !important;
   }
 
   .shad-button_dark_4 {

@@ -3,11 +3,10 @@ import {
     getnoti,
     getPosts,
     getStories,
-    getSuggestions,
     getUsers,
 } from "@/api/api";
 import { shuffleArray } from "@/lib/hooks/shuffle";
-import type { Noti, Post, Story, Suggestion, User } from "@/lib/types/types";
+import type { Noti, Post, Story, User } from "@/lib/types/types";
 
 export const usePosts = () => {
     return useQuery<Post[]>({
@@ -22,14 +21,6 @@ export const useStories = () => {
         queryKey: ['stories'],
         queryFn: getStories,
         select:(data)=> shuffleArray(data)
-    })
-}
-
-export const useSuggestions = () => {
-    return useQuery<Suggestion[]>({
-        queryKey:['suggestions'],
-        queryFn: getSuggestions,
-        select:(data)=>shuffleArray(data)
     })
 }
 

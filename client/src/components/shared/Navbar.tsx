@@ -1,5 +1,6 @@
 import React from "react";
 import NotificationIcon from "../ui/notification";
+import logo from "../../../public/assets/images/logo.png"
 
 type NavbarProps = {
     children: React.ReactNode;
@@ -12,7 +13,7 @@ export const Navbar = ({ children }: NavbarProps) => {
             <nav className="sticky top-0 z-50 bg-dark-1 border-b border-dark-4">
                 <div className="max-w-[900px] mx-auto px-5 md:px-8 h-16 flex-between">
                     {/* Left */}
-                    <h1 className="h3-bold">Feed</h1>
+                    <img src={logo} className="w-10 h-10 object-contain brightness-0 saturate-100 invert sepia hue-rotate-[200deg]" alt="logo" />
 
                     {/* Right */}
                     <ul className="flex items-center gap-6">

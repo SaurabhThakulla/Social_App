@@ -17,7 +17,7 @@ const Sidebar = () => {
     const navigate = useNavigate();
     
     return (
-        <aside className="hidden min-[1020px]:flex flex-col w-64 bg-dark-2 p-6">
+        <aside className="hidden min-[1020px]:flex flex-col min-w-[14vw] bg-dark-2 p-6">
 
             {/* Profile */}
             <div

@@ -1,5 +1,6 @@
 import { usePosts } from "@/api/queries/index";
 import FeedLoader from "@/components/skeltons/feed";
+import { Button } from "@/components/ui/button";
 import { useTag } from "@/context/TagProvider";
 
 
@@ -32,9 +33,9 @@ const Home = () => {
           const { authorId, content, createdAt, metrics, image } = e;
           
           return (
-            <div key={e.id} className="mb-6">
+            <div key={e.id} className="w-full mb-6 bg-dark-2 border border-dark-4 rounded-2xl p-5">
               {/* Header */}
-              <div className="flex items-center gap-3 mb-2">
+              <div className="flex items-center gap-3 mb-2 p-2">
                 <div className="w-9 h-9 rounded-full bg-gray-300 flex items-center justify-center font-semibold">
                   {authorId?.[0] || "U"}
                 </div>
@@ -57,18 +58,17 @@ const Home = () => {
 
               {/* Content */}
               <p className="base-regular mb-4">{content}</p>
-
               {/* Actions */}
-              <div className="flex gap-6 text-sm text-gray-600">
-                <button className="hover:text-black">
-                  ❤️ {metrics?.likes || 0}
-                </button>
-                <button className="hover:text-black">
-                  💬 {metrics?.comments || 0}
-                </button>
-                <button className="hover:text-black">
-                  🔄 {metrics?.shares || 0}
-                </button>
+              <div className="flex justify-between items-center text-sm text-light-3 mt-4">
+                <Button className="flex items-center gap-2 bg-transparent hover:bg-dark-3 px-4 py-2 rounded-lg transition">
+                  ❤️ <span>{metrics?.likes || 0}</span>
+                </Button>
+                <Button className="flex items-center gap-2 bg-transparent hover:bg-dark-3 px-4 py-2 rounded-lg transition">
+                  💬 <span>{metrics?.comments || 0}</span>
+                </Button>
+                <Button className="flex items-center gap-2 bg-transparent hover:bg-dark-3 px-4 py-2 rounded-lg transition">
+                  🔄 <span>{metrics?.shares || 0}</span>
+                </Button>
               </div>
             </div>
           );

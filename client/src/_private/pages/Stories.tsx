@@ -1,4 +1,4 @@
-import { useStories } from "@/api/queries";
+import { useStories, useUsers } from "@/api/queries";
 import Recomendation from "@/components/skeltons/recomendation";
 import { Storiessk } from "@/components/skeltons/stories";
 import { SuggestionsSkeleton } from "@/components/skeltons/suggestions";
@@ -11,14 +11,15 @@ type StoriesProps = {
 };
 
 const Stories = ({ posts }: StoriesProps) => {
-    const { data: stories, isLoading } = useStories();
+    const { data: stories, isLoading: storiesLoading } = useStories();
+    const { data: users, isLoading: suggestionLoading } = useUsers();
     const { activeTag, setActiveTag } = useTag();
     const uniqueTags = [...new Set(posts.map((p) => p.tag))];
     return (
             <aside className="home-creators">
 
                 {/* Stories */}
-                {isLoading ? (
+            {storiesLoading ? (
                     <Storiessk />
                 ) : (
                     <>
@@ -41,7 +42,39 @@ const Stories = ({ posts }: StoriesProps) => {
                     </>
                 )}
             {/* SUGGESTIONS */}
-            <SuggestionsSkeleton/>
+            {suggestionLoading ? (
+                <SuggestionsSkeleton />
+            ) : (
+                <>
+                    <h3 className="small-semibold">Suggestions</h3>
+
+                    {users?.slice(0, 3).map(function (e) {
+                        return (
+                            <div key={e.id} className="flex-between">
+                                <div className="flex-start gap-3">
+                                    <img src={e.avatar} alt="userlogo" className="h-14 w-14 rounded-full bg-dark-4 flex-center text-xs"/>
+                                    <p>{e.username}</p>
+                                </div>
+
+                                <Button className="shad-button_primary px-6 rounded-full">
+                                    Sync Aura
+                                </Button>
+                            </div>
+                        );
+                    })}
+
+                    {/* See More Button */}
+                    {users && users.length > 3 && (
+                        <Button
+                            variant="ghost"
+                                className="w-full mt-2 text-sm text-primary-500"
+                                onClick={()=>{alert("This button functionality will be added soon")}}
+                        >
+                            See More
+                        </Button>
+                    )}
+                </>
+            )}
 
 
 

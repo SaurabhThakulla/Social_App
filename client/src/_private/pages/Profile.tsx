@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+
 function Profile() {
   const img = 'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=600&auto=format&fit=crop&q=80';
   return (
@@ -19,9 +21,9 @@ function Profile() {
               <p className="small-regular text-light-4">@saurav</p>
             </div>
 
-            <button className="shad-button_primary px-6 py-2 rounded-lg">
+            <Button className="shad-button_primary px-6 py-2 rounded-lg">
               Edit Profile
-            </button>
+            </Button>
           </div>
 
           <p className="base-regular text-light-3 max-w-xl">
@@ -45,12 +47,12 @@ function Profile() {
 
       {/* Tabs */}
       <div className="flex w-full max-w-5xl gap-4">
-        <button className="profile-tab text-primary-500">
+        <Button className="profile-tab text-primary-500">
           <span className="base-medium">Posts</span>
-        </button>
-        <button className="profile-tab">
+        </Button>
+        <Button className="profile-tab">
           <span className="base-medium">Saved</span>
-        </button>
+        </Button>
       </div>
 
       {/* Posts Grid */}

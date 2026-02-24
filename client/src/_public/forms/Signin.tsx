@@ -86,7 +86,7 @@ const Signin = () => {
             )}
           />
 
-          <Button type="submit" className="shad-button_primary">
+          <Button type="submit" className="shad-button_primary" onClick={()=>{window.location.href("/home")}}>
             {isloading ? (
               <div className="flex gap-3 shad-button-secoundary">
                 <Loader />
@@ -102,7 +102,7 @@ const Signin = () => {
               to="/signup"
               className="text-primary-500 text-small-semibold ml-1"
             >
-              Sign in
+              Create account
             </Link>
           </p>
         </form>

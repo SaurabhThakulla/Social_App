@@ -115,7 +115,7 @@ const Signin = () => {
           <p className="text-small-regular text-light-2 text-center mt-2 cursor-pointer">
             Already Have an account?
             <Link
-              to="/sigin"
+              to="/"
               className="text-primary-500 text-small-semibold ml-1"
             >
               Login

@@ -126,12 +126,12 @@ html, body {
 
   /* Explore */
   .explore-container {
-    @apply flex flex-col flex-1 max-w-[900px] items-center overflow-scroll py-10 px-5 md:p-14 custom-scrollbar;
+   @apply flex flex-col flex-1 w-full items-center overflow-scroll py-6 px-4 md:px-8 custom-scrollbar;
   }
 
   .explore-inner_container {
-    @apply max-w-5xl flex flex-col items-center w-full gap-6 md:gap-9;
-  }
+    @apply flex flex-col w-full gap-6;
+   }
 
   .explore-search {
     @apply h-12 bg-dark-4 border-none placeholder:text-light-4 focus-visible:ring-0 focus-visible:ring-offset-0 ring-offset-0 !important;
@@ -172,13 +172,13 @@ html, body {
   }
 
   /* Profile */
-  .profile-container {
-    @apply flex flex-col max-w-[900px] items-center flex-1 gap-10 overflow-scroll py-10 px-5 md:p-14 custom-scrollbar;
-  }
+ .profile-container {
+  @apply flex flex-col w-full items-center flex-1 gap-10 overflow-scroll py-8 px-4 md:px-8 custom-scrollbar;
+}
 
-  .profile-inner_container {
-    @apply flex items-center md:mb-8 xl:items-start gap-8 flex-col xl:flex-row relative max-w-5xl w-full;
-  }
+ .profile-inner_container {
+  @apply flex items-center gap-8 flex-col md:flex-row w-full max-w-5xl;
+}
 
   .profile-tab {
     @apply flex-center gap-3 py-4 w-48 bg-dark-2  transition flex-1 xl:flex-initial;

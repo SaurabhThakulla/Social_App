@@ -7,7 +7,7 @@ export default function NotFound() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const t = setTimeout(() => navigate("/sigin"), 7000);
+        const t = setTimeout(() => navigate("/"), 7000);
         return () => clearTimeout(t);
     }, [navigate]);
 
@@ -67,7 +67,7 @@ export default function NotFound() {
                 <motion.button
                     whileHover={{ scale: 1.06 }}
                     whileTap={{ scale: 0.95 }}
-                    onClick={() => navigate("/sigin")}
+                    onClick={() => navigate("/")}
                     className="mt-8 px-8 py-3 rounded-full
             bg-dark-4 border border-dark-4
             hover:bg-primary-500

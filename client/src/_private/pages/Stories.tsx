@@ -23,13 +23,13 @@ const Stories = ({ posts }: StoriesProps) => {
                     <Storiessk />
                 ) : (
                     <>
-                        <h3 className="small-semibold mb-4">Stories</h3>
+                        <h3 className="small-semibold">Stories</h3>
 
                         <div className="flex gap-4 overflow-y-auto custom-scrollbar pb-3">
                             {stories?.map(function (e) {
                                 return (
                                     <div key={e._id} className="flex flex-col items-center gap-2">
-                                        <div className="h-14 w-14 rounded-full bg-primary-500 flex-center text-sm font-bold">
+                                        <div className="h-14 w-14 rounded-xl bg-primary-500 flex-center text-sm font-bold">
                                             {e.userId[0]}
                                         </div>
                                         <p className="tiny-medium text-light-4">
@@ -67,7 +67,7 @@ const Stories = ({ posts }: StoriesProps) => {
                     {users && users.length > 3 && (
                         <Button
                             variant="ghost"
-                                className="w-full mt-2 text-sm text-primary-500"
+                                className="w-full text-sm text-primary-500"
                                 onClick={()=>{alert("This button functionality will be added soon")}}
                         >
                             See More

@@ -7,15 +7,17 @@ function Profile() {
       {/* Profile Header */}
       <div className="profile-inner_container">
         {/* Avatar */}
-        <img
-          src={img}
-          alt="profile"
-          className="h-36 w-36 rounded-full object-cover border border-dark-4"
-        />
+        <div className="flex justify-center md:justify-start w-full md:w-auto">
+          <img
+            src={img}
+            alt="profile"
+            className="h-32 w-32 md:h-36 md:w-36 rounded-full object-cover border-2 border-dark-4"
+          />
+        </div>
 
         {/* User Info */}
-        <div className="flex flex-col gap-4 flex-1">
-          <div className="flex-between">
+        <div className="flex flex-col gap-5 flex-1 w-full">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
               <h2 className="h2-bold">Saurav Thakulla</h2>
               <p className="small-regular text-light-4">@saurav</p>
@@ -26,12 +28,12 @@ function Profile() {
             </Button>
           </div>
 
-          <p className="base-regular text-light-3 max-w-xl">
+          <p className="base-regular text-light-3 max-w-2xl">
             Developer | Anime lover | Building cool stuff with React & Tailwind 🚀
           </p>
 
           {/* Stats */}
-          <div className="flex gap-6">
+          <div className="flex gap-8">
             <p className="base-medium">
               <span className="body-bold">120</span> Posts
             </p>
@@ -56,13 +58,13 @@ function Profile() {
       </div>
 
       {/* Posts Grid */}
-      <div className="grid-container">
+      <div className="w-full max-w-5xl grid grid-cols-2 md:grid-cols-3 gap-2">
         {[1, 2, 3, 4, 5, 6].map((item) => (
           <div key={item} className="grid-post_link">
             <img
               src={`https://picsum.photos/500/500?random=${item}`}
               alt="post"
-              className="w-full h-full object-cover"
+              className="w-full aspect-square object-cover hover:scale-105 transition duration-300"
             />
           </div>
         ))}

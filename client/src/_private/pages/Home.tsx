@@ -2,11 +2,26 @@ import { usePosts } from "@/api/queries/index";
 import FeedLoader from "@/components/skeltons/feed";
 import { Button } from "@/components/ui/button";
 import { useTag } from "@/context/TagProvider";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 
 
 const Home = () => {
   const { data: posts, isLoading } = usePosts();
   const { activeTag } = useTag();
+  const [openPost, setOpen] = useState<any | null>(null);
+
+  const form = useForm({
+    defaultValues: {
+      comment: "",
+    },
+  });
+  const onSubmit = (values: any) => {
+    console.log(values);
+    form.reset();
+  };
 
   const orderedPosts = activeTag
     ? [
@@ -27,16 +42,15 @@ const Home = () => {
 
 
   return (
-    <section className="home-container">
+    <section className="home-container w-[44vw]">
       <div className="home-posts mx-auto">
         {orderedPosts.map((e) => {
           const { authorId, content, createdAt, metrics, image } = e;
-          
           return (
             <div key={e.id} className="w-full mb-6 bg-dark-2 border border-dark-4 rounded-2xl p-5">
               {/* Header */}
-              <div className="flex items-center gap-3 mb-2 p-2">
-                <div className="w-9 h-9 rounded-full bg-gray-300 flex items-center justify-center font-semibold">
+              <div className="flex items-center gap-3 mb-2 p-2 cursor-pointer">
+                <div className="w-11 h-11 rounded-full bg-gray-300 flex items-center justify-center font-semibold">
                   {authorId?.[0] || "U"}
                 </div>
                 <div>
@@ -53,6 +67,7 @@ const Home = () => {
                   src={image}
                   alt="post"
                   className="w-full h-90 object-cover rounded-xl mb-3"
+                  onClick={() => setOpen(e)}
                 />
               )}
 
@@ -73,6 +88,77 @@ const Home = () => {
             </div>
           );
         })}
+        {openPost && (
+        <div className="fixed inset-0 bg-black z-50 flex">
+
+          {/* LEFT SIDE - Image */}
+          <div className="flex-1 flex items-center justify-center relative">
+
+            {/* Close Button */}
+            <button
+              onClick={() => setOpen(null)}
+              className="absolute top-5 left-5 text-white text-2xl"
+            >
+              ✕
+            </button>
+
+            <img
+                src={openPost.image}
+              className="max-h-[100vh] max-w-[100vw] object-contain"
+            />
+          </div>
+
+          {/* RIGHT SIDE - Info Panel */}
+            <div className="hidden md:flex w-[380px] bg-dark-2 border-l border-dark-4 p-6 flex-col">
+              <div className="flex gap-6">
+                <h3 className="base-semibold flex w-14 h-14 justify-center text-center items-center mb-2 bg-primary-500 rounded-full">
+                {"U"}
+              </h3>
+                <h3 className="base-semibold flex w-14 h-14 justify-center text-center items-center mb-2">
+                  {openPost.authorId}
+                </h3>
+              </div>
+
+            <p className="text-light-3 mb-4">
+                {openPost.content}
+            </p>
+
+            <div className="flex  justify-between gap-1 mt-6 text-light-3">
+                <Button className="shad-button_primary px-6 py-2 rounded-lg w-full">❤️ {openPost.metrics?.likes || 0}</Button>
+                <Button className="shad-button_primary px-6 py-2 rounded-lg w-full">💬 {openPost.metrics?.comments || 0}</Button>
+                <Button className="shad-button_primary px-6 py-2 rounded-lg w-full">🔄 {openPost.metrics?.shares || 0}</Button>
+              </div>
+              
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="mt-6 space-y-4">
+
+                  <FormField
+                    control={form.control}
+                    name="comment"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Add Comment</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Write a comment..."
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <Button type="submit" className="shad-button_primary w-full">
+                    Post Comment
+                  </Button>
+
+                </form>
+              </Form>
+          </div>
+
+        </div>
+        )}
       </div>
     </section>
   );

@@ -86,7 +86,7 @@ const Signin = () => {
             )}
           />
 
-          <Button type="submit" className="shad-button_primary" onClick={()=>{window.location.href("/home")}}>
+          <Button type="submit" className="shad-button_primary" onClick={() => { window.location.href = "/home"}}>
             {isloading ? (
               <div className="flex gap-3 shad-button-secoundary">
                 <Loader />

@@ -18,14 +18,14 @@ function Explore() {
                 />
 
                 {/* Masonry Grid */}
-                <div className="w-full columns-2 sm:columns-3 lg:columns-4 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
                     {posts?.map((post) => (
                         <div key={post.id} className="mb-4 break-inside-avoid">
                             <img
                                 src={post.image}
                                 alt="explore"
                                 loading="lazy"
-                                className="w-full rounded-xl object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
+                                className="w-full aspect-square object-cover rounded-md hover:scale-105 transition duration-300 cursor-pointer"
                             />
                         </div>
                     ))}

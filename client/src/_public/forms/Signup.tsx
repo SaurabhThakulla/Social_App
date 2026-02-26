@@ -1,11 +1,10 @@
-import * as React from "react";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import logo from "/assets/images/logo.svg";
+import logo from "@/assets/images/logo.svg";
 import {
   Form,
   FormControl,

@@ -1,5 +1,5 @@
 import { Outlet, Navigate } from "react-router-dom";
-import sideImg from "/assets/images/side-img.png";
+import sideImg from "@/assets/images/side-img.png";
 
 const AuthLayout = () => {
   const isauthenic = false;

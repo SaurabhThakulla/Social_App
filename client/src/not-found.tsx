@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import logo from "/assets/images/logo.svg";
+import logo from "@/assets/images/logo.svg";
 
 export default function NotFound() {
     const navigate = useNavigate();

@@ -1,6 +1,6 @@
 import React from "react";
 import NotificationIcon from "../ui/notification";
-import logo from "../../../public/assets/images/logo.png"
+import logo from "@/assets/images/logo.png"
 
 type NavbarProps = {
     children: React.ReactNode;

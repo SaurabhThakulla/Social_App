@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { icons } from "@/assets/icons/icons";
 
 
 const Home = () => {
@@ -42,7 +43,7 @@ const Home = () => {
 
 
   return (
-    <section className="home-container w-[44vw]">
+    <section className="home-container xl:w-[44vw] w-[100%]">
       <div className="home-posts mx-auto">
         {orderedPosts.map((e) => {
           const { authorId, content, createdAt, metrics, image } = e;
@@ -74,16 +75,33 @@ const Home = () => {
               {/* Content */}
               <p className="base-regular mb-4">{content}</p>
               {/* Actions */}
-              <div className="flex justify-between items-center text-sm text-light-3 mt-4">
-                <Button className="flex items-center gap-2 bg-transparent hover:bg-dark-3 px-4 py-2 rounded-lg transition">
-                  ❤️ <span>{metrics?.likes || 0}</span>
-                </Button>
-                <Button className="flex items-center gap-2 bg-transparent hover:bg-dark-3 px-4 py-2 rounded-lg transition">
-                  💬 <span>{metrics?.comments || 0}</span>
-                </Button>
-                <Button className="flex items-center gap-2 bg-transparent hover:bg-dark-3 px-4 py-2 rounded-lg transition">
-                  🔄 <span>{metrics?.shares || 0}</span>
-                </Button>
+              <div className="border-t border-dark-4 mt-4 pt-2">
+                <div className="flex justify-between items-center text-sm text-light-2">
+
+                  <Button
+                    className="flex-1 flex items-center justify-center gap-2 
+                 bg-transparent hover:bg-dark-3 
+                 py-2 rounded-lg transition-all duration-200">
+                    <span className="text-lg">{metrics.likes}</span>
+                    <img src={icons.like} alt="" className="w-5 h-5"/>
+                  </Button>
+
+                  <Button
+                    className="flex-1 flex items-center justify-center gap-2 
+                 bg-transparent hover:bg-dark-3 
+                 py-2 rounded-lg transition-all duration-200">
+                    <span className="text-lg">💬{metrics.comments}</span> 
+                  </Button>
+
+                  <Button
+                    className="flex-1 flex items-center justify-center gap-2 
+                 bg-transparent hover:bg-dark-3 
+                 py-2 rounded-lg transition-all duration-200" onClick={()=>{alert("This button functionality will be added soon")}}>
+                    <span className="text-lg">{metrics.shares}</span>
+                    <img src={icons.share} alt="" className="w-5 h-5" />
+                  </Button>
+
+                </div>
               </div>
             </div>
           );
@@ -124,9 +142,9 @@ const Home = () => {
             </p>
 
             <div className="flex  justify-between gap-1 mt-6 text-light-3">
-                <Button className="shad-button_primary px-6 py-2 rounded-lg w-full">❤️ {openPost.metrics?.likes || 0}</Button>
+                <Button className="shad-button_primary px-6 py-2 rounded-lg w-full">{icons.like}{openPost.metrics?.likes || 0}</Button>
                 <Button className="shad-button_primary px-6 py-2 rounded-lg w-full">💬 {openPost.metrics?.comments || 0}</Button>
-                <Button className="shad-button_primary px-6 py-2 rounded-lg w-full">🔄 {openPost.metrics?.shares || 0}</Button>
+                <Button className="shad-button_primary px-6 py-2 rounded-lg w-full">{icons.share} {openPost.metrics?.shares || 0}</Button>
               </div>
               
               <Form {...form}>

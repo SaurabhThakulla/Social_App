@@ -63,9 +63,9 @@ router.post("/login", async function (req, res) {
         );
 
         res.json({ token });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Login failed" });
+    } catch (error: any) {
+        console.error("SIGNUP ERROR:", error.message);
+        res.status(500).json({ error: error.message });
     }
 });
 

@@ -18,7 +18,7 @@ const startServer = async function () {
   await connectDB();
 
   app.listen(PORT, function () {
-    console.log("🚀 Server running on port " + PORT);
+    console.log("local seed compiling on port " + PORT);
   });
 };
 

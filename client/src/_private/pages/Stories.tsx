@@ -28,7 +28,7 @@ const Stories = ({ posts }: StoriesProps) => {
                         <div className="flex gap-4 overflow-y-auto custom-scrollbar pb-3">
                             {stories?.map(function (e) {
                                 return (
-                                    <div key={e._id} className="flex flex-col items-center gap-2">
+                                    <div key={e.id} className="flex flex-col items-center gap-2">
                                         <div className="h-14 w-14 rounded-xl bg-primary-500 flex-center text-sm font-bold">
                                             {e.userId[0]}
                                         </div>

@@ -121,7 +121,9 @@ function Settings() {
                 </div>
 
                 {/* Logout */}
-                <button className="w-full bg-red-600 hover:bg-red-700 transition py-3 rounded-2xl font-semibold">
+                <button className="w-full bg-red-600 hover:bg-red-700 transition py-3 rounded-2xl font-semibold" onClick={() => {
+                    localStorage.removeItem("token");
+                    window.location.href = "/";}}>
                     Logout
                 </button>
 

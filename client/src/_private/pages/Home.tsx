@@ -90,7 +90,7 @@ const Home = () => {
                     className="flex-1 flex items-center justify-center gap-2 
                  bg-transparent hover:bg-dark-3 
                  py-2 rounded-lg transition-all duration-200">
-                    <span className="text-lg">💬{metrics.comments}</span> 
+                    <span className="text-lg" onClick={() => setOpen(e)}>💬{metrics.comments}</span> 
                   </Button>
 
                   <Button

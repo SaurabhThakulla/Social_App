@@ -1,13 +1,188 @@
 import { pool } from "../../config/db";
 
-export const createPost = async function (userId: string, content: string) {
 
+// ================= CREATE POST =================
+
+export const createPost = async function (userId: string, content: string) {
     const result = await pool.query(
         `INSERT INTO posts (user_id, content)
-     VALUES ($1,$2)
-     RETURNING *`,
+         VALUES ($1,$2)
+         RETURNING *`,
         [userId, content]
     );
 
     return result.rows[0];
+};
+
+
+
+// ================= GET FEED =================
+
+export const getPosts = async function () {
+    const result = await pool.query(
+        `SELECT
+            posts.id,
+            posts.content,
+            posts.created_at,
+
+            users.username,
+            users.avatar,
+
+            COUNT(DISTINCT post_likes.id) AS likes_count,
+            COUNT(DISTINCT post_comments.id) AS comments_count,
+
+            COALESCE(
+                json_agg(
+                    DISTINCT jsonb_build_object(
+                        'url', post_media.media_url,
+                        'type', post_media.media_type
+                    )
+                ) FILTER (WHERE post_media.id IS NOT NULL),
+                '[]'
+            ) AS media
+
+        FROM posts
+
+        JOIN users
+        ON posts.user_id = users.id
+
+        LEFT JOIN post_likes
+        ON post_likes.post_id = posts.id
+
+        LEFT JOIN post_comments
+        ON post_comments.post_id = posts.id
+
+        LEFT JOIN post_media
+        ON post_media.post_id = posts.id
+
+        GROUP BY posts.id, users.username, users.avatar
+
+        ORDER BY posts.created_at DESC`
+    );
+
+    return result.rows;
+};
+
+
+
+// ================= LIKE POST =================
+
+export const likePost = async function (
+    postId: string,
+    userId: string
+) {
+    const result = await pool.query(
+        `INSERT INTO post_likes (post_id, user_id)
+         VALUES ($1,$2)
+         ON CONFLICT (post_id, user_id) DO NOTHING
+         RETURNING *`,
+        [postId, userId]
+    );
+
+    return result.rows[0] || null;
+};
+
+
+
+// ================= UNLIKE POST =================
+
+export const unlikePost = async function (
+    postId: string,
+    userId: string
+) {
+    await pool.query(
+        `DELETE FROM post_likes
+         WHERE post_id = $1 AND user_id = $2`,
+        [postId, userId]
+    );
+};
+
+
+
+// ================= ADD COMMENT =================
+
+export const addPostComment = async function (
+    postId: string,
+    userId: string,
+    comment: string
+) {
+    const result = await pool.query(
+        `INSERT INTO post_comments (post_id, user_id, comment)
+         VALUES ($1, $2, $3)
+         RETURNING id, post_id, user_id, comment, created_at`,
+        [postId, userId, comment]
+    );
+
+    return result.rows[0];
+};
+
+
+
+// ================= GET COMMENTS =================
+
+export const listPostComments = async function (
+    postId: string,
+    limit = 20,
+    offset = 0
+) {
+    const result = await pool.query(
+        `SELECT
+            post_comments.id,
+            post_comments.comment,
+            post_comments.created_at,
+
+            users.username,
+            users.avatar
+
+        FROM post_comments
+
+        JOIN users
+        ON users.id = post_comments.user_id
+
+        WHERE post_comments.post_id = $1
+
+        ORDER BY post_comments.created_at DESC
+
+        LIMIT $2 OFFSET $3`,
+        [postId, limit, offset]
+    );
+
+    return result.rows;
+};
+
+
+
+// ================= ADD MEDIA =================
+
+export const addPostMedia = async function (
+    postId: string,
+    mediaUrl: string,
+    mediaType: string
+) {
+    const result = await pool.query(
+        `INSERT INTO post_media (post_id, media_url, media_type)
+         VALUES ($1,$2,$3)
+         RETURNING *`,
+        [postId, mediaUrl, mediaType]
+    );
+
+    return result.rows[0];
+};
+
+
+
+// ================= GET MEDIA =================
+
+export const getPostMedia = async function (postId: string) {
+    const result = await pool.query(
+        `SELECT
+            id,
+            media_url,
+            media_type
+         FROM post_media
+         WHERE post_id = $1`,
+        [postId]
+    );
+
+    return result.rows;
 };

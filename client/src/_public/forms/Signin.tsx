@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import { LoginValidation } from "@/lib/validation";
 import Loader from "@/components/shared/Loader";
+import { AUTH_USER_ID_KEY, getUserIdFromToken } from "@/hooks/useAuthUserId";
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -52,6 +53,11 @@ const Signin = () => {
 
       // Save token temporarily
       localStorage.setItem("token", data.token);
+      const userId = getUserIdFromToken(data.token);
+      if (userId) {
+        localStorage.setItem(AUTH_USER_ID_KEY, userId);
+      }
+      window.dispatchEvent(new Event("auth-changed"));
 
       // Redirect after success
       navigate("/home");

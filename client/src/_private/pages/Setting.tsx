@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AUTH_USER_ID_KEY } from "@/hooks/useAuthUserId";
 
 function Settings() {
 
@@ -123,6 +124,8 @@ function Settings() {
                 {/* Logout */}
                 <button className="w-full bg-red-600 hover:bg-red-700 transition py-3 rounded-2xl font-semibold" onClick={() => {
                     localStorage.removeItem("token");
+                    localStorage.removeItem(AUTH_USER_ID_KEY);
+                    window.dispatchEvent(new Event("auth-changed"));
                     window.location.href = "/";}}>
                     Logout
                 </button>

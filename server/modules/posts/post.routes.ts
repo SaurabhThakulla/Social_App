@@ -7,6 +7,7 @@ import {
     likePost,
     unlikePost,
     addPostMedia,
+    deletePost,
 } from "./post.service";
 
 const router = Router();
@@ -17,9 +18,9 @@ const router = Router();
 router.post("/", async function (req, res) {
     const { userId, content } = req.body;
 
-    if (!userId || !content) {
+    if (!userId) {
         return res.status(400).json({
-            error: "userId and content are required",
+            error: "userId is required",
         });
     }
 
@@ -36,8 +37,20 @@ router.post("/", async function (req, res) {
 // ================= GET POSTS =================
 
 router.get("/", async function (req, res) {
+    const limitRaw = Number(req.query.limit);
+    const offsetRaw = Number(req.query.offset);
+    const limit =
+        Number.isFinite(limitRaw) && limitRaw > 0 ? limitRaw : 10;
+    const offset =
+        Number.isFinite(offsetRaw) && offsetRaw >= 0 ? offsetRaw : 0;
+    const userId =
+        typeof req.query.userId === "string" &&
+        req.query.userId.trim().length > 0
+            ? req.query.userId
+            : null;
+
     try {
-        const posts = await getPosts();
+        const posts = await getPosts(userId, limit, offset);
         res.json(posts);
     } catch (error) {
         console.error(error);
@@ -144,6 +157,28 @@ router.post("/:postId/media", async function (req, res) {
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Failed to add media" });
+    }
+});
+
+// ================= DELETE POST =================
+
+router.delete("/:postId", async function (req, res) {
+    const { postId } = req.params;
+    const { userId } = req.body;
+
+    if (!userId) {
+        return res.status(400).json({ error: "userId required" });
+    }
+
+    try {
+        const deleted = await deletePost(postId, userId);
+        if (!deleted) {
+            return res.status(404).json({ error: "Post not found" });
+        }
+        res.json({ message: "Post deleted" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Failed to delete post" });
     }
 });
 

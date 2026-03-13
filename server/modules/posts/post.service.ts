@@ -8,7 +8,7 @@ export const createPost = async function (userId: string, content: string) {
         `INSERT INTO posts (user_id, content)
          VALUES ($1,$2)
          RETURNING *`,
-        [userId, content]
+        [userId, content ?? null]
     );
 
     return result.rows[0];
@@ -18,18 +18,27 @@ export const createPost = async function (userId: string, content: string) {
 
 // ================= GET FEED =================
 
-export const getPosts = async function () {
+export const getPosts = async function (
+    userId: string | null,
+    limit = 10,
+    offset = 0
+) {
     const result = await pool.query(
         `SELECT
             posts.id,
+            posts.user_id,
             posts.content,
             posts.created_at,
 
             users.username,
             users.avatar,
 
-            COUNT(DISTINCT post_likes.id) AS likes_count,
-            COUNT(DISTINCT post_comments.id) AS comments_count,
+            COUNT(DISTINCT post_likes.id)::int AS likes_count,
+            COUNT(DISTINCT post_comments.id)::int AS comments_count,
+            COALESCE(
+                BOOL_OR(post_likes.user_id = $1::uuid),
+                false
+            ) AS liked_by_user,
 
             COALESCE(
                 json_agg(
@@ -55,9 +64,11 @@ export const getPosts = async function () {
         LEFT JOIN post_media
         ON post_media.post_id = posts.id
 
-        GROUP BY posts.id, users.username, users.avatar
+        GROUP BY posts.id, posts.user_id, users.username, users.avatar
 
-        ORDER BY posts.created_at DESC`
+        ORDER BY posts.created_at DESC
+        LIMIT $2 OFFSET $3`,
+        [userId, limit, offset]
     );
 
     return result.rows;
@@ -167,6 +178,22 @@ export const addPostMedia = async function (
     );
 
     return result.rows[0];
+};
+
+// ================= DELETE POST =================
+
+export const deletePost = async function (
+    postId: string,
+    userId: string
+) {
+    const result = await pool.query(
+        `DELETE FROM posts
+         WHERE id = $1 AND user_id = $2
+         RETURNING id`,
+        [postId, userId]
+    );
+
+    return result.rows[0] || null;
 };
 
 

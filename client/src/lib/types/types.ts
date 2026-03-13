@@ -3,6 +3,18 @@ export type User = {
     username: string;
     avatar?: string;
 };
+
+export type Profile = {
+    id: string;
+    name: string;
+    username: string;
+    avatar?: string | null;
+    bio?: string | null;
+    created_at: string;
+    posts_count: number;
+    followers_count: number;
+    following_count: number;
+};
 export type Post = {
     id: string;
     authorId: string;
@@ -33,3 +45,28 @@ export type Noti = {
     isRead: boolean;
     createdAt: string;
 }
+
+export type PostMedia = {
+    url: string;
+    type: string | null;
+};
+
+export type FeedPost = {
+    id: string;
+    user_id?: string;
+    username: string;
+    content: string;
+    created_at: string;
+    likes_count: number;
+    comments_count: number;
+    liked_by_user?: boolean;
+    media?: PostMedia[];
+};
+
+export type PostComment = {
+    id: string;
+    comment: string;
+    created_at: string;
+    username: string;
+    avatar?: string | null;
+};

@@ -3,8 +3,21 @@ const BASE_URL = "http://localhost:5000/api";
 
 // ================= POSTS (FEED) =================
 
-export const getPosts = async function (limit = 10, offset = 0) {
-    const res = await fetch(`${BASE_URL}/posts?limit=${limit}&offset=${offset}`);
+export const getPosts = async function (
+    limit = 10,
+    offset = 0,
+    userId?: string
+) {
+    const params = new URLSearchParams({
+        limit: String(limit),
+        offset: String(offset),
+    });
+
+    if (userId) {
+        params.set("userId", userId);
+    }
+
+    const res = await fetch(`${BASE_URL}/posts?${params.toString()}`);
 
     if (!res.ok) throw new Error("Failed to fetch posts");
 
@@ -115,6 +128,22 @@ export const addPostMedia = async function (
     return res.json();
 };
 
+// ================= DELETE POST =================
+
+export const deletePost = async function (postId: string, userId: string) {
+    const res = await fetch(`${BASE_URL}/posts/${postId}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId }),
+    });
+
+    if (!res.ok) throw new Error("Failed to delete post");
+
+    return res.json();
+};
+
 
 // ================= USERS =================
 
@@ -122,6 +151,21 @@ export const getUsers = async function () {
     const res = await fetch(`${BASE_URL}/users`);
 
     if (!res.ok) throw new Error("Failed to fetch users");
+
+    return res.json();
+};
+
+// ================= PROFILE =================
+
+export const getProfile = async function (userId: string) {
+    const res = await fetch(`${BASE_URL}/users/${userId}`);
+
+    if (!res.ok) {
+        const message = await res.text();
+        throw new Error(
+            message || `Failed to fetch profile (${res.status})`
+        );
+    }
 
     return res.json();
 };

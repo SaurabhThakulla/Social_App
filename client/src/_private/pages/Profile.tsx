@@ -1,76 +1,155 @@
-import { Button } from "@/components/ui/button";
+import { useProfile, usePosts } from "@/api/queries";
+import { useAuthUserId } from "@/hooks/useAuthUserId";
+import { useLikePost } from "@/hooks/useLikePost";
+import { useProfilePosts } from "@/hooks/useProfilePosts";
+import { useDeletePost } from "@/hooks/useDeletePost";
+import { useProfileComments } from "@/hooks/useProfileComments";
+import ProfileHeader from "@/components/shared/profile/ProfileHeader";
+import ProfileIntro from "@/components/shared/profile/ProfileIntro";
+import ProfilePhotos from "@/components/shared/profile/ProfilePhotos";
+import ProfilePosts from "@/components/shared/profile/ProfilePosts";
+import ProfilePostModal from "@/components/shared/profile/ProfilePostModal";
+import type { FeedPost } from "@/lib/types/types";
+import { useState } from "react";
+import type { UseQueryResult } from "@tanstack/react-query";
 
-function Profile() {
-  const img = 'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=600&auto=format&fit=crop&q=80';
+const Profile = () => {
+  const userId = useAuthUserId();
+  const {
+    data: profile,
+    isLoading: profileLoading,
+    isError,
+    error,
+  } = useProfile(userId ?? "");
+  const { data: posts, isLoading: postsLoading } = usePosts(
+    50,
+    0,
+    userId ?? undefined
+  ) as unknown as UseQueryResult<FeedPost[]>;
+
+  const [openPost, setOpenPost] = useState<FeedPost | null>(null);
+  const [pendingDeleteId, setPendingDeleteId] = useState<string | null>(null);
+
+  const postsKey = ["posts", 50, 0, userId ?? null];
+  const likeMutation = useLikePost(postsKey, userId ?? "");
+  const deleteMutation = useDeletePost({
+    userId,
+    onDeleted: (postId) => {
+      setPendingDeleteId(null);
+      if (openPost?.id === postId) {
+        setOpenPost(null);
+      }
+    },
+  });
+  const { form, comments, onSubmit } = useProfileComments(
+    openPost?.id ?? null,
+    userId
+  );
+
+  const { userPosts, photos, coverImage, avatar } = useProfilePosts({
+    posts,
+    profile,
+  });
+
+  const formatDate = (date: string) =>
+    new Date(date).toLocaleDateString("en-IN", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
+
+  const handleShare = (postId: string) => {
+    navigator.clipboard.writeText(`${window.location.href}/post/${postId}`);
+  };
+
+  if (profileLoading) {
+    return (
+      <section className="profile-container">
+        <p className="text-light-3">Loading profile...</p>
+      </section>
+    );
+  }
+
+  if (isError) {
+    return (
+      <section className="profile-container">
+        <p className="text-light-3">
+          Failed to load profile: {String(error)}
+        </p>
+      </section>
+    );
+  }
+
+  if (!profile) {
+    return (
+      <section className="profile-container">
+        <p className="text-light-3">Profile not found</p>
+      </section>
+    );
+  }
+
   return (
     <section className="profile-container">
-      {/* Profile Header */}
-      <div className="profile-inner_container">
-        {/* Avatar */}
-        <div className="flex justify-center md:justify-start w-full md:w-auto">
-          <img
-            src={img}
-            alt="profile"
-            className="h-32 w-32 md:h-36 md:w-36 rounded-full object-cover border-2 border-dark-4"
+      <ProfileHeader
+        profile={profile}
+        coverImage={coverImage}
+        avatar={avatar}
+      />
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 w-full">
+        <div className="md:col-span-1 space-y-6">
+          <ProfileIntro profile={profile} />
+          <ProfilePhotos photos={photos} />
+        </div>
+
+        <div className="md:col-span-2">
+          <ProfilePosts
+            posts={userPosts}
+            postsLoading={postsLoading}
+            pendingDeleteId={pendingDeleteId}
+            formatDate={formatDate}
+            onOpen={setOpenPost}
+            onLike={(postId, likedByUser) =>
+              userId
+                ? likeMutation.mutate({ postId, likedByUser })
+                : undefined
+            }
+            onShare={handleShare}
+            onToggleDelete={(postId) =>
+              setPendingDeleteId((current) =>
+                current === postId ? null : postId
+              )
+            }
+            onConfirmDelete={(postId) =>
+              userId ? deleteMutation.mutate(postId) : undefined
+            }
+            onCancelDelete={() => setPendingDeleteId(null)}
+            isDeleting={deleteMutation.isPending}
           />
         </div>
-
-        {/* User Info */}
-        <div className="flex flex-col gap-5 flex-1 w-full">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div>
-              <h2 className="h2-bold">Saurav Thakulla</h2>
-              <p className="small-regular text-light-4">@saurav</p>
-            </div>
-
-            <Button className="shad-button_primary px-6 py-2 rounded-lg">
-              Edit Profile
-            </Button>
-          </div>
-
-          <p className="base-regular text-light-3 max-w-2xl">
-            Developer | Anime lover | Building cool stuff with React & Tailwind 🚀
-          </p>
-
-          {/* Stats */}
-          <div className="flex gap-8">
-            <p className="base-medium">
-              <span className="body-bold">120</span> Posts
-            </p>
-            <p className="base-medium">
-              <span className="body-bold">1.8k</span> Followers
-            </p>
-            <p className="base-medium">
-              <span className="body-bold">210</span> Following
-            </p>
-          </div>
-        </div>
       </div>
 
-      {/* Tabs */}
-      <div className="flex w-full max-w-5xl gap-4">
-        <Button className="profile-tab text-primary-500">
-          <span className="base-medium">Posts</span>
-        </Button>
-        <Button className="profile-tab">
-          <span className="base-medium">Saved</span>
-        </Button>
-      </div>
-
-      {/* Posts Grid */}
-      <div className="w-full max-w-5xl grid grid-cols-2 md:grid-cols-3 gap-2">
-        {[1, 2, 3, 4, 5, 6].map((item) => (
-          <div key={item} className="grid-post_link">
-            <img
-              src={`https://picsum.photos/500/500?random=${item}`}
-              alt="post"
-              className="w-full aspect-square object-cover hover:scale-105 transition duration-300"
-            />
-          </div>
-        ))}
-      </div>
+      <ProfilePostModal
+        post={openPost}
+        onClose={() => setOpenPost(null)}
+        formatDate={formatDate}
+        comments={comments}
+        form={form}
+        onSubmit={onSubmit}
+        pendingDeleteId={pendingDeleteId}
+        onToggleDelete={(postId) =>
+          setPendingDeleteId((current) =>
+            current === postId ? null : postId
+          )
+        }
+        onConfirmDelete={(postId) =>
+          userId ? deleteMutation.mutate(postId) : undefined
+        }
+        onCancelDelete={() => setPendingDeleteId(null)}
+        isDeleting={deleteMutation.isPending}
+      />
     </section>
   );
-}
+};
 
 export default Profile;

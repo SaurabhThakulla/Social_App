@@ -48,12 +48,21 @@ const PostModal = ({
       </div>
       <div className="hidden md:flex w-[380px] bg-dark-2 border-l border-dark-4 p-6 flex-col">
         <div className="flex gap-4 mb-4">
-          <div className="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center">
-            {post.username[0]}
+          <div className="w-10 h-10 rounded-full bg-dark-3 border border-dark-4 flex items-center justify-center overflow-hidden">
+            {post.avatar ? (
+              <img
+                src={post.avatar}
+                alt={`${post.username} avatar`}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <span className="text-light-2">{post.username[0]}</span>
+            )}
           </div>
           <div>
-            <p>{post.username}</p>
+            <p>{post.name || post.username}</p>
             <p className="text-sm text-gray-400">
+              @{post.username} •{" "}
               {formatDate(post.created_at)}
             </p>
           </div>

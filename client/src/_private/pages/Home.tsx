@@ -1,4 +1,4 @@
-import { usePosts } from "@/api/queries";
+import { usePosts, useProfile } from "@/api/queries";
 import FeedLoader from "@/components/skeltons/feed";
 import CreatePost from "@/components/shared/CreatePost";
 import PostCard from "@/components/shared/PostCard";
@@ -14,6 +14,7 @@ import type { UseQueryResult } from "@tanstack/react-query";
 
 const Home = () => {
   const userId = useAuthUserId();
+  const { data: profile } = useProfile(userId ?? "");
   const { data: posts, isLoading } = usePosts(
     10,
     0,
@@ -58,6 +59,8 @@ const Home = () => {
         newImageName={imageCrop.newImageName}
         imageError={imageCrop.imageError}
         onClearImage={imageCrop.clearSelectedImage}
+        userAvatar={profile?.avatar ?? null}
+        userName={profile?.name || profile?.username || "U"}
       />
 
       <div className="home-posts mx-auto">

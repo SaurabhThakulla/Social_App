@@ -21,6 +21,7 @@ const App = () => {
         <Route element={<RootLayout />}>
           <Route path="/home" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:userId" element={<Profile />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/settings" element={<Settings />} />
         </Route>

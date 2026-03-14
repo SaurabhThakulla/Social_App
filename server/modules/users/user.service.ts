@@ -7,7 +7,7 @@ export const getUserProfile = async function (userId: string) {
             users.name,
             users.username,
             users.avatar,
-            NULL::text AS bio,
+            users.bio,
             users.created_at,
 
             COUNT(DISTINCT posts.id)::int AS posts_count,
@@ -32,4 +32,58 @@ export const getUserProfile = async function (userId: string) {
     );
 
     return result.rows[0] || null;
+};
+
+type UpdateUserProfileInput = {
+    name?: string | null;
+    username?: string | null;
+    bio?: string | null;
+    avatar?: string | null;
+};
+
+export const updateUserProfile = async function (
+    userId: string,
+    updates: UpdateUserProfileInput
+) {
+    const fields: string[] = [];
+    const values: Array<string | null> = [];
+    let index = 1;
+
+    if (updates.name !== undefined) {
+        fields.push(`name = $${index++}`);
+        values.push(updates.name);
+    }
+
+    if (updates.username !== undefined) {
+        fields.push(`username = $${index++}`);
+        values.push(updates.username);
+    }
+
+    if (updates.bio !== undefined) {
+        fields.push(`bio = $${index++}`);
+        values.push(updates.bio);
+    }
+
+    if (updates.avatar !== undefined) {
+        fields.push(`avatar = $${index++}`);
+        values.push(updates.avatar);
+    }
+
+    if (!fields.length) {
+        return null;
+    }
+
+    values.push(userId);
+
+    const result = await pool.query(
+        `UPDATE users
+         SET ${fields.join(", ")}
+         WHERE id = $${index}
+         RETURNING id`,
+        values
+    );
+
+    if (!result.rows[0]) return null;
+
+    return getUserProfile(userId);
 };

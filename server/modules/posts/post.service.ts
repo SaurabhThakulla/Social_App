@@ -30,6 +30,7 @@ export const getPosts = async function (
             posts.content,
             posts.created_at,
 
+            users.name,
             users.username,
             users.avatar,
 
@@ -64,7 +65,7 @@ export const getPosts = async function (
         LEFT JOIN post_media
         ON post_media.post_id = posts.id
 
-        GROUP BY posts.id, posts.user_id, users.username, users.avatar
+        GROUP BY posts.id, posts.user_id, users.name, users.username, users.avatar
 
         ORDER BY posts.created_at DESC
         LIMIT $2 OFFSET $3`,

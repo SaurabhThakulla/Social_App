@@ -15,6 +15,8 @@ type CreatePostProps = {
   newImageName: string;
   imageError: string | null;
   onClearImage: () => void;
+  userAvatar?: string | null;
+  userName?: string | null;
 };
 
 const CreatePost = ({
@@ -29,12 +31,24 @@ const CreatePost = ({
   newImageName,
   imageError,
   onClearImage,
+  userAvatar,
+  userName,
 }: CreatePostProps) => {
+  const userInitial = (userName || "U").trim().charAt(0).toUpperCase();
+
   return (
     <div className="bg-dark-2 border border-dark-4 rounded-2xl p-5 mb-6 shadow-sm w-full">
       <div className="flex gap-3">
-        <div className="w-10 h-10 rounded-full bg-primary-500 flex items-center justify-center font-semibold text-white">
-          U
+        <div className="w-10 h-10 rounded-full bg-dark-3 border border-dark-4 flex items-center justify-center font-semibold text-white overflow-hidden">
+          {userAvatar ? (
+            <img
+              src={userAvatar}
+              alt="profile avatar"
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <span className="text-light-2">{userInitial}</span>
+          )}
         </div>
         <div className="flex-1">
           <Input

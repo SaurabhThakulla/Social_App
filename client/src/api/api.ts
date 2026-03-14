@@ -170,6 +170,28 @@ export const getProfile = async function (userId: string) {
     return res.json();
 };
 
+export const updateProfile = async function (
+    userId: string,
+    payload: {
+        name?: string;
+        username?: string;
+        bio?: string | null;
+        avatar?: string | null;
+    }
+) {
+    const res = await fetch(`${BASE_URL}/users/${userId}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+    });
+
+    if (!res.ok) throw new Error("Failed to update profile");
+
+    return res.json();
+};
+
 
 // ================= STORIES (future) =================
 

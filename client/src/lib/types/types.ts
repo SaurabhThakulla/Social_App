@@ -54,7 +54,9 @@ export type PostMedia = {
 export type FeedPost = {
     id: string;
     user_id?: string;
+    name?: string;
     username: string;
+    avatar?: string | null;
     content: string;
     created_at: string;
     likes_count: number;

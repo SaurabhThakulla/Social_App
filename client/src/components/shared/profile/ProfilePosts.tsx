@@ -14,6 +14,8 @@ type ProfilePostsProps = {
   onConfirmDelete: (postId: string) => void;
   onCancelDelete: () => void;
   isDeleting: boolean;
+  onSetProfilePicture?: (mediaUrl: string) => void;
+  canDelete?: boolean;
 };
 
 const ProfilePosts = ({
@@ -28,6 +30,8 @@ const ProfilePosts = ({
   onConfirmDelete,
   onCancelDelete,
   isDeleting,
+  onSetProfilePicture,
+  canDelete = false,
 }: ProfilePostsProps) => {
   return (
     <div className="bg-dark-2 border border-dark-4 rounded-2xl p-5">
@@ -49,6 +53,8 @@ const ProfilePosts = ({
                 onLike={onLike}
                 onShare={onShare}
                 onToggleDelete={onToggleDelete}
+                onSetProfilePicture={onSetProfilePicture}
+                canDelete={canDelete}
               />
               <DeletePostConfirm
                 isOpen={pendingDeleteId === post.id}

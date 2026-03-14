@@ -25,6 +25,7 @@ type ProfilePostModalProps = {
   onConfirmDelete: (postId: string) => void;
   onCancelDelete: () => void;
   isDeleting: boolean;
+  canDelete?: boolean;
 };
 
 const ProfilePostModal = ({
@@ -39,6 +40,7 @@ const ProfilePostModal = ({
   onConfirmDelete,
   onCancelDelete,
   isDeleting,
+  canDelete = false,
 }: ProfilePostModalProps) => {
   if (!post) return null;
 
@@ -86,20 +88,24 @@ const ProfilePostModal = ({
             {post.comments_count}
           </Button>
         </div>
-        <div className="mb-4">
-          <Button
-            onClick={() => onToggleDelete(post.id)}
-            className="w-full bg-red-600 hover:bg-red-700"
-          >
-            Delete Post
-          </Button>
-        </div>
-        <DeletePostConfirm
-          isOpen={pendingDeleteId === post.id}
-          onDelete={() => onConfirmDelete(post.id)}
-          onCancel={onCancelDelete}
-          isDeleting={isDeleting}
-        />
+        {canDelete && (
+          <>
+            <div className="mb-4">
+              <Button
+                onClick={() => onToggleDelete(post.id)}
+                className="w-full bg-red-600 hover:bg-red-700"
+              >
+                Delete Post
+              </Button>
+            </div>
+            <DeletePostConfirm
+              isOpen={pendingDeleteId === post.id}
+              onDelete={() => onConfirmDelete(post.id)}
+              onCancel={onCancelDelete}
+              isDeleting={isDeleting}
+            />
+          </>
+        )}
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
@@ -120,7 +126,7 @@ const ProfilePostModal = ({
             </Button>
           </form>
         </Form>
-        <div className="flex-1 overflow-y-auto custom-scrollbar pr-2 mb-4">
+        <div className="flex-1 overflow-y-auto custom-scrollbar pr-2 mb-4 mt-4">
           {comments?.length ? (
             comments.map((c) => (
               <div key={c.id} className="mb-3">

@@ -1,4 +1,5 @@
 import { pool } from "../../config/db";
+import { createNotification } from "../notifications/notification.service";
 
 
 // ================= CREATE POST =================
@@ -91,7 +92,26 @@ export const likePost = async function (
         [postId, userId]
     );
 
-    return result.rows[0] || null;
+    const like = result.rows[0] || null;
+
+    if (like) {
+        const ownerResult = await pool.query(
+            `SELECT user_id FROM posts WHERE id = $1`,
+            [postId]
+        );
+        const postOwnerId = ownerResult.rows[0]?.user_id || null;
+
+        if (postOwnerId && postOwnerId !== userId) {
+            await createNotification({
+                userId: postOwnerId,
+                actorId: userId,
+                type: "like_post",
+                postId,
+            });
+        }
+    }
+
+    return like;
 };
 
 

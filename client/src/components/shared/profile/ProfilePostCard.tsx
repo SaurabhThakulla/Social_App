@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+﻿import { Button } from "@/components/ui/button";
 import { icons } from "@/assets/icons/icons";
 import type { FeedPost } from "@/lib/types/types";
 
@@ -66,7 +66,7 @@ const ProfilePostCard = ({
           className="flex-1 flex items-center justify-center gap-2 bg-transparent hover:bg-dark-3"
         >
           <span>{post.comments_count}</span>
-          <img src={icons.chat} className="w-5 h-5" />
+          <img src={icons.comment} className="w-5 h-5" />
         </Button>
         <Button
           onClick={() => onShare(post.id)}

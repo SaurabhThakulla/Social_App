@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import NotificationIcon from "../ui/notification";
 import logo from "@/assets/images/logo.png"
 
@@ -17,8 +18,13 @@ export const Navbar = ({ children }: NavbarProps) => {
 
                     {/* Right */}
                     <ul className="flex items-center gap-6">
-                        <li className="small-medium text-light-4 hover:text-white cursor-pointer transition">
-                            Friends
+                        <li>
+                            <Link
+                                to="/friends"
+                                className="small-medium text-light-4 hover:text-white cursor-pointer transition"
+                            >
+                                Friends
+                            </Link>
                         </li>
                         <li className="small-medium text-light-4 hover:text-white cursor-pointer transition">
                             Leaderboards

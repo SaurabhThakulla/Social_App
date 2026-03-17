@@ -217,10 +217,122 @@ export const getTags = async function () {
 
 // ================= NOTIFICATIONS =================
 
-export const getNoti = async function () {
-    const res = await fetch(`${BASE_URL}/notifications`);
+export const getNoti = async function (userId?: string) {
+    const params = new URLSearchParams();
+    if (userId) {
+        params.set("userId", userId);
+    }
+
+    const query = params.toString();
+    const res = await fetch(
+        `${BASE_URL}/notifications${query ? `?${query}` : ""}`
+    );
 
     if (!res.ok) throw new Error("Failed to fetch notifications");
 
     return res.json();
 };
+
+// ================= SYNC USER =================
+
+export const syncUser = async function (
+    targetUserId: string,
+    userId: string
+) {
+    const res = await fetch(`${BASE_URL}/users/${targetUserId}/sync`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId }),
+    });
+
+    if (!res.ok) throw new Error("Failed to sync user");
+
+    return res.json();
+};
+
+// ================= SYNC REQUESTS =================
+
+export const getSyncRequests = async function (
+    userId: string,
+    direction: "outgoing" | "incoming" = "outgoing",
+    status: "pending" | "accepted" | "declined" | "all" = "pending"
+) {
+    const params = new URLSearchParams({
+        userId,
+        direction,
+        status,
+    });
+    const res = await fetch(
+        `${BASE_URL}/users/${userId}/sync-requests?${params.toString()}`
+    );
+
+    if (!res.ok) throw new Error("Failed to fetch sync requests");
+
+    return res.json();
+};
+
+export const acceptSyncRequest = async function (
+    userId: string,
+    requesterId: string
+) {
+    const res = await fetch(
+        `${BASE_URL}/users/${userId}/sync-requests/${requesterId}/accept`,
+        { method: "POST" }
+    );
+
+    if (!res.ok) throw new Error("Failed to accept sync request");
+
+    return res.json();
+};
+
+export const declineSyncRequest = async function (
+    userId: string,
+    requesterId: string
+) {
+    const res = await fetch(
+        `${BASE_URL}/users/${userId}/sync-requests/${requesterId}/decline`,
+        { method: "POST" }
+    );
+
+    if (!res.ok) throw new Error("Failed to decline sync request");
+
+    return res.json();
+};
+
+// ================= USER SYNCS =================
+
+export const getUserSyncs = async function (
+    userId: string,
+    limit = 20,
+    offset = 0
+) {
+    const params = new URLSearchParams({
+        limit: String(limit),
+        offset: String(offset),
+    });
+    const res = await fetch(
+        `${BASE_URL}/users/${userId}/syncs?${params.toString()}`
+    );
+
+    if (!res.ok) throw new Error("Failed to fetch syncs");
+
+    return res.json();
+};
+
+export const unsyncUser = async function (
+    userId: string,
+    targetUserId: string
+) {
+    const res = await fetch(
+        `${BASE_URL}/users/${userId}/syncs/${targetUserId}`,
+        { method: "DELETE" }
+    );
+
+    if (!res.ok) throw new Error("Failed to unsync user");
+
+    return res.json();
+};
+
+

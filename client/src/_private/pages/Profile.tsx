@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { getUserSyncs, unsyncUser } from "@/api/api";
 import { useProfile, usePosts } from "@/api/queries";
 import { useAuthUserId } from "@/hooks/useAuthUserId";
 import { useLikePost } from "@/hooks/useLikePost";
@@ -11,12 +13,13 @@ import ProfilePhotos from "@/components/shared/profile/ProfilePhotos";
 import ProfilePosts from "@/components/shared/profile/ProfilePosts";
 import ProfilePostModal from "@/components/shared/profile/ProfilePostModal";
 import EditProfileModal from "@/components/shared/profile/EditProfileModal";
-import type { FeedPost } from "@/lib/types/types";
-import { useRef, useState } from "react";
+import SyncListModal from "@/components/shared/profile/SyncListModal";
+import type { FeedPost, User } from "@/lib/types/types";
+import { useEffect, useRef, useState } from "react";
 import type { ChangeEvent } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-
 const Profile = () => {
   const userId = useAuthUserId();
   const params = useParams();
@@ -43,8 +46,45 @@ const Profile = () => {
   const [editBio, setEditBio] = useState("");
   const [editAvatar, setEditAvatar] = useState<string | null>(null);
   const editAvatarInputRef = useRef<HTMLInputElement>(null);
+  const [syncsOpen, setSyncsOpen] = useState(false);
+  const [syncs, setSyncs] = useState<User[]>([]);
+  const [syncsOffset, setSyncsOffset] = useState(0);
+  const [syncsLoading, setSyncsLoading] = useState(false);
+  const [syncsHasMore, setSyncsHasMore] = useState(true);
+  const syncsPageSize = 10;
+
+  const queryClient = useQueryClient();
+  const [unsyncingId, setUnsyncingId] = useState<string | null>(null);
 
   const postsKey = ["posts", 50, 0, userId ?? null];
+  const unsyncMutation = useMutation({
+    mutationFn: async (targetUserId: string) => {
+      if (!userId) {
+        throw new Error("User not authenticated");
+      }
+      return unsyncUser(userId, targetUserId);
+    },
+    onMutate: (targetUserId) => {
+      setUnsyncingId(targetUserId);
+    },
+    onSuccess: (_data, targetUserId) => {
+      setSyncs((prev) => prev.filter((sync) => sync.id !== targetUserId));
+      if (userId) {
+        queryClient.invalidateQueries({
+          queryKey: ["profile", userId],
+        });
+        queryClient.invalidateQueries({
+          queryKey: ["user-syncs", userId, "suggestions"],
+        });
+      }
+      queryClient.invalidateQueries({
+        queryKey: ["profile", targetUserId],
+      });
+    },
+    onSettled: () => {
+      setUnsyncingId(null);
+    },
+  });
   const likeMutation = useLikePost(postsKey, userId ?? "");
   const updateProfileMutation = useUpdateProfile();
   const deleteMutation = useDeletePost({
@@ -65,6 +105,32 @@ const Profile = () => {
     posts,
     profile,
   });
+
+  const loadSyncs = async (reset = false) => {
+    if (!viewedUserId || syncsLoading) return;
+    setSyncsLoading(true);
+    const offset = reset ? 0 : syncsOffset;
+    try {
+      const data = await getUserSyncs(
+        viewedUserId,
+        syncsPageSize,
+        offset
+      );
+      setSyncs((prev) => (reset ? data : [...prev, ...data]));
+      setSyncsOffset(offset + data.length);
+      setSyncsHasMore(data.length === syncsPageSize);
+    } finally {
+      setSyncsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (syncsOpen) {
+      setSyncsOffset(0);
+      setSyncsHasMore(true);
+      loadSyncs(true);
+    }
+  }, [syncsOpen, viewedUserId]);
 
   const openEditProfile = (autoPickAvatar = false) => {
     if (!profile) return;
@@ -172,6 +238,7 @@ const Profile = () => {
         avatar={avatarOverride || avatar}
         onEditProfile={isOwnProfile ? () => openEditProfile(false) : undefined}
         onAvatarClick={isOwnProfile ? () => openEditProfile(true) : undefined}
+        onSyncsClick={() => setSyncsOpen(true)}
       />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 w-full">
@@ -260,8 +327,40 @@ const Profile = () => {
           editName.trim().length > 0 && editUsername.trim().length > 0
         }
       />
+      <SyncListModal
+        isOpen={syncsOpen}
+        onClose={() => setSyncsOpen(false)}
+        users={syncs}
+        isLoading={syncsLoading}
+        canLoadMore={syncsHasMore}
+        onLoadMore={() => loadSyncs(false)}
+        canRemove={isOwnProfile}
+        removingId={unsyncingId}
+        onRemoveSync={
+          isOwnProfile
+            ? (targetUserId) => unsyncMutation.mutate(targetUserId)
+            : undefined
+        }
+      />
     </section>
   );
 };
 
 export default Profile;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

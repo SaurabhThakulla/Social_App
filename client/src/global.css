@@ -147,7 +147,7 @@ html, body {
   }
 
   .home-creators {
-    @apply hidden md:flex flex-col w-72 2xl:w-465 px-6 py-10 gap-10 custom-scrollbar;
+    @apply hidden md:flex flex-col w-72 2xl:w-465 px-6 py-10 gap-10 custom-scrollbar h-full overflow-y-auto;
   }
 
   /* Post Details */

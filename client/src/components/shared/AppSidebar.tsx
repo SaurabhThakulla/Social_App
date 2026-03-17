@@ -1,4 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
+import Advertisement from "../ui/advertisment";
 
 const Sidebar = () => {
     const user = {
@@ -49,6 +50,9 @@ const Sidebar = () => {
                 <SidebarItem to="/profile" label="Profile" />
                 <SidebarItem to="/settings" label="Settings" />
             </nav>
+            <div className="mt-[27vh]">
+                <Advertisement />
+           </div>
         </aside>
     );
 };

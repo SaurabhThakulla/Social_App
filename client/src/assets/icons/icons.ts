@@ -32,6 +32,7 @@ export const icons: Record<string, string> = {
   back,
   black,
   bookmark,
+  comment: chat,
   chat,
   deleteIcon,
   edit,

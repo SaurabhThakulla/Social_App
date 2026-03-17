@@ -33,7 +33,7 @@ export const useStories = () => {
     return useQuery<Story[]>({
         queryKey: ['stories'],
         queryFn: getStories,
-        select: (data) => shuffleArray(data)
+        select: shuffleArray
     });
 };
 
@@ -44,17 +44,18 @@ export const useUsers = () => {
     return useQuery<User[]>({
         queryKey: ['users'],
         queryFn: getUsers,
-        select: (data) => shuffleArray(data)
+        select: shuffleArray
     });
 };
 
 
 // ================= NOTIFICATIONS =================
 
-export const useNoti = () => {
+export const useNoti = (userId?: string) => {
     return useQuery<Noti[]>({
-        queryKey: ['noti'],
-        queryFn: getNoti
+        queryKey: ["noti", userId ?? null],
+        queryFn: () => getNoti(userId),
+        enabled: Boolean(userId),
     });
 };
 

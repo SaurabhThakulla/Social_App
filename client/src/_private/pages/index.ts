@@ -3,3 +3,4 @@ export { default as Profile } from "./Profile";
 export { default as Stories } from "./Stories";
 export { default as Setting } from "./Setting";
 export { default as Explore } from "./Explore";
+export { default as Friends } from "./Friends";

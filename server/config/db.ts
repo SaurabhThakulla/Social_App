@@ -10,8 +10,12 @@ export const pool = new Pool({
 
 export const connectDB = async function () {
     try {
-        await pool.connect();
-        console.log("PostgreSQL configured");
+        const client = await pool.connect();
+        const info = await client.query(
+            "select current_user, current_database()"
+        );
+        console.log("PostgreSQL configured", info.rows[0]);
+        client.release();
     } catch (err) {
         console.error("DB Connection Failed", err);
     }

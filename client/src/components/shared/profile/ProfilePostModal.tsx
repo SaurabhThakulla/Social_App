@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+﻿import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   Form,
@@ -12,6 +12,7 @@ import type { FeedPost, PostComment } from "@/lib/types/types";
 import type { UseFormReturn } from "react-hook-form";
 import DeletePostConfirm from "@/components/shared/profile/DeletePostConfirm";
 import type { ProfileCommentFormValues } from "@/hooks/useProfileComments";
+import { X } from "lucide-react";
 
 type ProfilePostModalProps = {
   post: FeedPost | null;
@@ -49,9 +50,11 @@ const ProfilePostModal = ({
       <div className="flex-1 flex items-center justify-center relative">
         <button
           onClick={onClose}
-          className="absolute top-5 left-5 text-white text-2xl"
+          type="button"
+          aria-label="Close"
+          className="absolute top-5 left-5 text-white"
         >
-          x
+          <X className="w-6 h-6" />
         </button>
         {post.media?.[0]?.url ? (
           <img
@@ -156,3 +159,4 @@ const ProfilePostModal = ({
 };
 
 export default ProfilePostModal;
+

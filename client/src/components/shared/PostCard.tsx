@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+ import { Button } from "@/components/ui/button";
 import { icons } from "@/assets/icons/icons";
 import type { FeedPost } from "@/lib/types/types";
 import { useNavigate } from "react-router-dom";
@@ -80,7 +80,8 @@ const PostCard = ({
           onClick={() => onOpen(post)}
           className="flex-1 flex items-center justify-center gap-2 bg-transparent hover:bg-dark-3"
         >
-          ðŸ’¬ {post.comments_count}
+          <span>{post.comments_count}</span>
+          <img src={icons.comment} className="w-5 h-5" />
         </Button>
         <Button
           onClick={() => onShare(post.id)}

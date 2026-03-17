@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+﻿import { Button } from "@/components/ui/button";
 import { icons } from "@/assets/icons/icons";
 import type { Profile } from "@/lib/types/types";
 
@@ -8,6 +8,7 @@ type ProfileHeaderProps = {
   avatar: string;
   onEditProfile?: () => void;
   onAvatarClick?: () => void;
+  onSyncsClick?: () => void;
 };
 
 const ProfileHeader = ({
@@ -16,6 +17,7 @@ const ProfileHeader = ({
   avatar,
   onEditProfile,
   onAvatarClick,
+  onSyncsClick,
 }: ProfileHeaderProps) => {
   return (
     <div className="w-full bg-dark-2 border border-dark-4 rounded-2xl overflow-hidden">
@@ -48,14 +50,15 @@ const ProfileHeader = ({
               <p>
                 <span className="body-bold">{profile.posts_count}</span> Posts
               </p>
-              <p>
-                <span className="body-bold">{profile.followers_count}</span>{" "}
-                Followers
-              </p>
-              <p>
-                <span className="body-bold">{profile.following_count}</span>{" "}
-                Following
-              </p>
+              <button
+                type="button"
+                onClick={onSyncsClick}
+                className="hover:text-light-1 transition"
+                disabled={!onSyncsClick}
+              >
+                <span className="body-bold">{profile.syncs_count}</span>{" "}
+                Syncs
+              </button>
             </div>
           </div>
           {onEditProfile && (

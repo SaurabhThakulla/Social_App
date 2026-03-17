@@ -12,6 +12,7 @@ import CommentList from "@/components/shared/CommentList";
 import type { FeedPost, PostComment } from "@/lib/types/types";
 import type { UseFormReturn } from "react-hook-form";
 import type { CommentFormValues } from "@/hooks/usePostComments";
+import { X } from "lucide-react";
 
 type PostModalProps = {
   post: FeedPost | null;
@@ -37,9 +38,11 @@ const PostModal = ({
       <div className="flex-1 flex items-center justify-center relative">
         <button
           onClick={onClose}
-          className="absolute top-5 left-5 text-white text-2xl"
+          type="button"
+          aria-label="Close"
+          className="absolute top-5 left-5 text-white"
         >
-          âœ•
+          <X className="w-6 h-6" />
         </button>
         <img
           src={post.media?.[0]?.url}

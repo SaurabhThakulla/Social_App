@@ -1,4 +1,5 @@
 export type User = {
+    mutualFriends: number;
     id: string;
     username: string;
     avatar?: string;
@@ -12,8 +13,7 @@ export type Profile = {
     bio?: string | null;
     created_at: string;
     posts_count: number;
-    followers_count: number;
-    following_count: number;
+    syncs_count: number;
 };
 export type Post = {
     id: string;
@@ -37,6 +37,7 @@ export type Story = {
 export type Noti = {
     id: string;
     user: {
+        id: string;
         name: string;
         avatar: string;
     }

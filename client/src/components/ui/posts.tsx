@@ -1,4 +1,4 @@
-import { memo } from "react";
+﻿import { memo } from "react";
 import { Button } from "@/components/ui/button";
 import { icons } from "@/assets/icons/icons";
 
@@ -62,7 +62,8 @@ const PostCard = ({ post, like, open, formatDate }: Props) => {
                     onClick={() => open(post)}
                     className="flex-1 flex items-center justify-center gap-2 bg-transparent hover:bg-dark-3"
                 >
-                    💬 {post.comments_count}
+                    <span>{post.comments_count}</span>
+                    <img src={icons.comment} className="w-5 h-5" />
                 </Button>
 
                 <Button

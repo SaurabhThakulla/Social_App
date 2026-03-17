@@ -1,11 +1,15 @@
 import Navbar from "@/components/shared/Navbar";
 import AppSidebar from "@/components/shared/AppSidebar";
-import { usePosts } from "@/api/queries";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { Stories } from "./pages";
+import { useAuthUserId } from "@/hooks/useAuthUserId";
 
 const RootLayout = () => {
-  const { data: posts } = usePosts();
+  const authUserId = useAuthUserId();
+
+  if (!authUserId) {
+    return <Navigate to="/" replace />;
+  }
 
   return(
     <div className="flex h-screen w-full md:justify-center md:items-center">
@@ -24,8 +28,7 @@ const RootLayout = () => {
 
       {/* Stories */}
       <div className="hidden min-[1020px]:block border-l border-dark-4 bg-dark-2 h-full min-w-[26vw]">
-
-          <Stories posts={posts || []} />
+          <Stories />
       </div>
 
     </div>

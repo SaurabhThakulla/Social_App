@@ -1,12 +1,13 @@
 import { Outlet, Navigate } from "react-router-dom";
 import sideImg from "@/assets/images/side-img.png";
+import { useAuthUserId } from "@/hooks/useAuthUserId";
 
 const AuthLayout = () => {
-  const isauthenic = false;
+  const authUserId = useAuthUserId();
   return (
     <div className="flex w-full">
-      {isauthenic ? (
-        <Navigate to="/" />
+      {authUserId ? (
+        <Navigate to="/home" replace />
       ) : (
         <>
           <img

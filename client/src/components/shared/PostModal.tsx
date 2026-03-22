@@ -72,17 +72,16 @@ const PostModal = ({
         </div>
         <p className="mb-4 break-words">{post.content}</p>
         <div className="flex gap-2 mb-6">
-          <Button className="shad-button_primary w-full">
-            <img src={icons.like} alt="" />
-            {post.likes_count}
+          <Button className="flex-1 flex items-center justify-center gap-2 bg-transparent hover:bg-dark-3">
+            <span>{post.likes_count}</span>
+            <img src={icons.like} className="w-5 h-5" />
           </Button>
-          <Button className="shad-button_primary w-full">
-            <img src={icons.comment} alt="" />
-            {post.comments_count}
+          <Button
+            className="flex-1 flex items-center justify-center gap-2 bg-transparent hover:bg-dark-3"
+          >
+            <span>{post.comments_count}</span>
+            <img src={icons.comment} className="w-5 h-5" />
           </Button>
-        </div>
-        <div className="flex-1 overflow-y-auto custom-scrollbar pr-2 mb-4">
-          <CommentList comments={comments} formatDate={formatDate} />
         </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
@@ -103,6 +102,9 @@ const PostModal = ({
             </Button>
           </form>
         </Form>
+        <div className="flex-1 overflow-y-auto custom-scrollbar pr-2 mt-4">
+          <CommentList comments={comments} formatDate={formatDate} />
+        </div>
       </div>
     </div>
   );

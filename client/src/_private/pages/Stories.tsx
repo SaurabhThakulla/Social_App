@@ -1,4 +1,4 @@
-import { getSyncRequests, getUserSyncs, syncUser } from "@/api/api";
+import { getSyncRequests, getUserSyncs, syncUser, cancelSyncRequest } from "@/api/api";
 import { useStories, useUsers } from "@/api/queries";
 import { Storiessk } from "@/components/skeltons/stories";
 import { SuggestionsSkeleton } from "@/components/skeltons/suggestions";
@@ -69,6 +69,34 @@ const Stories = () => {
         (outgoingRequests ?? []).map((request) => request.target_id)
     );
 
+    const cancelSyncMutation = useMutation({
+        mutationFn: async (targetUserId: string) => {
+            if (!authUserId) {
+                throw new Error("User not authenticated");
+            }
+            return cancelSyncRequest(authUserId, targetUserId);
+        },
+        onSuccess: (_data, targetUserId) => {
+            if (authUserId) {
+                queryClient.setQueryData<SyncRequest[]>(
+                    ["sync-requests", authUserId, "outgoing", "pending"],
+                    (old) =>
+                        (old ?? []).filter(
+                            (request) => request.target_id !== targetUserId
+                        )
+                );
+                queryClient.invalidateQueries({
+                    queryKey: [
+                        "sync-requests",
+                        authUserId,
+                        "outgoing",
+                        "pending",
+                    ],
+                });
+            }
+        },
+    });
+
     const suggestionUsers = (users ?? []).filter(
         (user) => user.id !== authUserId && !syncedIds.has(user.id)
     );
@@ -122,6 +150,14 @@ const Stories = () => {
                     <h3 className="small-semibold">Suggestions</h3>
                     <div className="flex flex-col gap-4">
                         {suggestionUsers.slice(0, 3).map(function (e) {
+                            const isPendingRequest = pendingIds.has(e.id);
+                            const isSyncing =
+                                syncMutation.isPending &&
+                                syncMutation.variables === e.id;
+                            const isCancelling =
+                                cancelSyncMutation.isPending &&
+                                cancelSyncMutation.variables === e.id;
+
                             return (
                                 <div
                                     key={e.id}
@@ -150,28 +186,30 @@ const Stories = () => {
                                         <Button
                                             type="button"
                                             className="shad-button_primary px-6 rounded-full"
-                                            disabled={
-                                                syncMutation.isPending ||
-                                                pendingIds.has(e.id)
-                                            }
+                                            disabled={isSyncing || isCancelling}
                                             onClick={(event) => {
                                                 event.stopPropagation();
                                                 event.preventDefault();
-                                                if (pendingIds.has(e.id)) {
-                                                    return;
-                                                }
                                                 if (!authUserId) {
                                                     window.alert("Please login to sync");
                                                     return;
                                                 }
+
+                                                if (isPendingRequest) {
+                                                    cancelSyncMutation.mutate(e.id);
+                                                    return;
+                                                }
+
                                                 syncMutation.mutate(e.id);
                                             }}
                                         >
-                                            {pendingIds.has(e.id)
-                                                ? "Waiting"
-                                                : syncMutation.isPending
-                                                  ? "Syncing..."
-                                                  : "Sync"}
+                                            {isPendingRequest
+                                                ? isCancelling
+                                                    ? "Cancelling..."
+                                                    : "Cancel"
+                                                : isSyncing
+                                                    ? "Syncing..."
+                                                    : "Sync"}
                                         </Button>
                                     </div>
                                 </div>
@@ -202,8 +240,4 @@ const Stories = () => {
 };
 
 export default Stories;
-
-
-
-
 

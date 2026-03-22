@@ -26,10 +26,10 @@ export const Navbar = ({ children }: NavbarProps) => {
                                 Friends
                             </Link>
                         </li>
-                        <li className="small-medium text-light-4 hover:text-white cursor-pointer transition">
+                        <li className="small-medium text-light-4 hover:text-white cursor-pointer transition" onClick={()=>{alert("LeaderBoard Will Soon implemented")}}>
                             Leaderboards
                         </li>
-                        <li className="small-medium text-light-4 hover:text-white cursor-pointer transition">
+                        <li className="small-medium text-light-4 hover:text-white cursor-pointer transition" onClick={() => { alert("Message feature will be implemented soon") }}>
                             Message
                         </li>
                         <li className="ml-auto">

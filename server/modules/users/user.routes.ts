@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
     createNotification,
     markSyncRequestHandled,
+    deleteSyncRequestNotification,
 } from "../notifications/notification.service";
 import {
     createSyncRequest,
@@ -9,6 +10,7 @@ import {
     listSyncRequests,
     listUserSyncs,
     listUsers,
+    cancelSyncRequest,
     syncUsers,
     unsyncUsers,
     updateSyncRequestStatus,
@@ -83,6 +85,28 @@ router.get("/:userId/sync-requests", async function (req, res) {
     }
 });
 
+// ================= CANCEL SYNC REQUEST =================
+
+router.delete("/:userId/sync-requests/:targetUserId", async function (req, res) {
+    const { userId: requesterId, targetUserId } = req.params;
+
+    try {
+        const canceled = await cancelSyncRequest(requesterId, targetUserId);
+
+        if (!canceled) {
+            return res
+                .status(404)
+                .json({ error: "Sync request not found or already handled" });
+        }
+
+        await deleteSyncRequestNotification(targetUserId, requesterId);
+
+        return res.json({ canceled: true });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Failed to cancel sync request" });
+    }
+});
 // ================= USER SYNCS =================
 
 router.get("/:userId/syncs", async function (req, res) {
@@ -250,8 +274,4 @@ router.patch("/:userId", async function (req, res) {
 });
 
 export default router;
-
-
-
-
 

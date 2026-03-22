@@ -1,4 +1,4 @@
-﻿import { pool } from "../../config/db";
+import { pool } from "../../config/db";
 
 type CreateNotificationInput = {
     userId: string;
@@ -33,6 +33,20 @@ export const markSyncRequestHandled = async function (
         [userId, actorId]
     );
 };
+
+export const deleteSyncRequestNotification = async function (
+    userId: string,
+    actorId: string
+) {
+    const result = await pool.query(
+        `DELETE FROM notifications
+         WHERE user_id = $1 AND actor_id = $2 AND type = 'sync_request'`,
+        [userId, actorId]
+    );
+
+    return result.rowCount > 0;
+};
+
 export const listNotifications = async function (
     userId: string,
     limit = 20,

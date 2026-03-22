@@ -130,6 +130,20 @@ export const updateSyncRequestStatus = async function (
 };
 
 
+export const cancelSyncRequest = async function (
+    requesterId: string,
+    targetId: string
+) {
+    const result = await pool.query(
+        `DELETE FROM sync_requests
+         WHERE requester_id = $1 AND target_id = $2 AND status = 'pending'
+         RETURNING id`,
+        [requesterId, targetId]
+    );
+
+    return Boolean(result.rows[0]);
+};
+
 export const syncUsers = async function (
     followerId: string,
     followingId: string
@@ -212,12 +226,4 @@ export const updateUserProfile = async function (
 
     return getUserProfile(userId);
 };
-
-
-
-
-
-
-
-
 

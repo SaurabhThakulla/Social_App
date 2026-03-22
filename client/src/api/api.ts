@@ -301,6 +301,19 @@ export const declineSyncRequest = async function (
     return res.json();
 };
 
+export const cancelSyncRequest = async function (
+    requesterId: string,
+    targetUserId: string
+) {
+    const res = await fetch(
+        `${BASE_URL}/users/${requesterId}/sync-requests/${targetUserId}`,
+        { method: "DELETE" }
+    );
+
+    if (!res.ok) throw new Error("Failed to cancel sync request");
+
+    return res.json();
+};
 // ================= USER SYNCS =================
 
 export const getUserSyncs = async function (
@@ -334,5 +347,4 @@ export const unsyncUser = async function (
 
     return res.json();
 };
-
 

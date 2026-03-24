@@ -51,10 +51,13 @@ export const useUsers = () => {
 
 // ================= NOTIFICATIONS =================
 
-export const useNoti = (userId?: string) => {
+export const useNoti = (
+    userId?: string,
+    status: "all" | "read" | "unread" = "all"
+) => {
     return useQuery<Noti[]>({
-        queryKey: ["noti", userId ?? null],
-        queryFn: () => getNoti(userId),
+        queryKey: ["noti", userId ?? null, status],
+        queryFn: () => getNoti(userId, status),
         enabled: Boolean(userId),
     });
 };

@@ -8,19 +8,18 @@ import { useAuthUserId } from "@/hooks/useAuthUserId";
 import {
     acceptSyncRequest,
     declineSyncRequest,
+    updateNotificationReadStatus,
 } from "@/api/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 function NotificationIcon() {
-    const [filter, setFilter] = useState<"all" | "unread">("all");
+    const [filter, setFilter] = useState<"all" | "unread" | "read">("all");
     const userId = useAuthUserId();
-    const { data: noti, isLoading } = useNoti(userId ?? undefined);
+    const { data: noti, isLoading } = useNoti(userId ?? undefined, filter);
+    const { data: unreadNoti } = useNoti(userId ?? undefined, "unread");
     const queryClient = useQueryClient();
     const [open, setOpen] = useState(false);
-    const filteredNoti =
-        filter === "unread"
-            ? noti?.filter((n) => !n.isRead)
-            : noti;
+    const unreadCount = unreadNoti?.length ?? 0;
 
     const acceptMutation = useMutation({
         mutationFn: (requesterId: string) => {
@@ -28,7 +27,7 @@ function NotificationIcon() {
             return acceptSyncRequest(userId, requesterId);
         },
         onSuccess: (_data, requesterId) => {
-            queryClient.invalidateQueries({ queryKey: ["noti", userId] });
+            queryClient.invalidateQueries({ queryKey: ["noti", userId ?? null] });
             queryClient.invalidateQueries({ queryKey: ["profile", userId] });
             queryClient.invalidateQueries({
                 queryKey: ["profile", requesterId],
@@ -45,10 +44,33 @@ function NotificationIcon() {
             return declineSyncRequest(userId, requesterId);
         },
         onSuccess: (_data, requesterId) => {
-            queryClient.invalidateQueries({ queryKey: ["noti", userId] });
+            queryClient.invalidateQueries({ queryKey: ["noti", userId ?? null] });
             queryClient.invalidateQueries({
                 queryKey: ["sync-requests", userId, "incoming", "pending"],
             });
+        },
+    });
+
+    const toggleReadMutation = useMutation({
+        mutationFn: (variables: { id: string; isRead: boolean }) => {
+            if (!userId) throw new Error("User not authenticated");
+            return updateNotificationReadStatus(
+                variables.id,
+                userId,
+                variables.isRead
+            );
+        },
+        onSuccess: (_data, variables) => {
+            // Refresh cached notifications for this user without touching other data
+            queryClient.invalidateQueries({ queryKey: ["noti", userId ?? null] });
+            // Optimistically adjust the currently visible list for snappier UI
+            queryClient.setQueryData(["noti", userId ?? null, filter], (current: typeof noti) =>
+                current?.map((item) =>
+                    item.id === variables.id
+                        ? { ...item, isRead: variables.isRead }
+                        : item
+                )
+            );
         },
     });
 
@@ -59,16 +81,15 @@ function NotificationIcon() {
                 <Bell size={19} className="text-light-1" />
             </div>
 
-            {/* Red Dot */}
-            {noti && (
-                <span className="absolute -top-1 -right-1 
-                         bg-primary-500 
-                         w-2 h-2 rounded-full" />
+            {/* Unread Badge */}
+            {unreadCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-primary-500 text-dark-1 w-5 h-5 rounded-full flex-center text-[11px] font-semibold">
+                    {unreadCount > 9 ? "9+" : unreadCount}
+                </span>
             )}
 
             {/* Dropdown */}
-            {open &&(    
-                         
+            {open && (
                 <div className="absolute right-0 mt-3 w-[30rem] bg-dark-2 border border-dark-4 rounded-3xl shadow-lg p-6 z-50 overflow-y-scroll custom-scrollbar">
                     {isLoading ? (
                            <NotificationSkeleton />
@@ -88,18 +109,36 @@ function NotificationIcon() {
                         >
                             Unread
                         </Button>
+                        <Button
+                            onClick={() => setFilter("read")}
+                            className={`${filter === "read" ? "bg-primary-600" : "bg-light-2"} text-black ml-3`}
+                        >
+                            Read
+                        </Button>
                    </div>
                     <div>
                         <div className="flex flex-col custom-scrollbar max-h-72 overflow-y-auto">
-                            {filteredNoti?.map((e) => {
+                            {noti?.map((e) => {
                                 const { id, user, type, isRead, createdAt } = e;
                                 const timeAgo = formatDistanceToNow(new Date(createdAt), {
                                     addSuffix: true,
                                 });
+                                const message =
+                                    type === "sync_request" ? "sent you a sync request" :
+                                        type === "sync_accepted" ? "accepted your sync request" :
+                                            type === "sync_declined" ? "declined your sync request" :
+                                                type === "follow" ? "synced with you" :
+                                                    type === "like_post" ? "liked your post" :
+                                                        type === "comment" ? "commented on your post" :
+                                                            type === "reply" ? "replied to your comment" :
+                                                                type === "tag" ? "tagged you in a post" :
+                                                                    type === "message" ? "sent you a message" :
+                                                                        "You have a new notification";
+
                                 return (
                                     <div
                                         key={id}
-                                        className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer ${!isRead ? "bg-dark-3" : "hover:bg-dark-3"}`}
+                                        className={`flex items-start gap-3 p-3 rounded-lg cursor-pointer border border-dark-4 ${!isRead ? "bg-dark-3" : "bg-dark-2"} hover:bg-dark-3 transition`}
                                     >
                                         {/* Avatar */}
                                         <div className="w-9 h-9 rounded-full bg-primary-500 flex-center small-semibold text-white">
@@ -112,23 +151,25 @@ function NotificationIcon() {
                                                 <span className="small-semibold">
                                                     {user.name}
                                                 </span>{" "}
-                                                {
-                                                    type === "sync_request" ? "sent you a sync request" :
-                                                        type === "sync_accepted" ? "accepted your sync request" :
-                                                            type === "sync_declined" ? "declined your sync request" :
-                                                                type === "follow" ? "synced with you" :
-                                                                type === "like_post" ? "liked your post" :
-                                                                    type === "comment" ? "commented on your post" :
-                                                                        type === "reply" ? "replied to your comment" :
-                                                                            type === "tag" ? "tagged you in a post" :
-                                                                                type === "message" ? "sent you a message" :
-                                                                                    "You have a new notification"
-                                                }
+                                                {message}
                                             </p>
                                             <p className="tiny-medium text-light-4 mt-1">
                                                 {timeAgo}
                                             </p>
+                                            <div className="mt-2 flex items-center gap-2">
+                                                {!isRead && (
+                                                    <span className="px-2 py-[3px] rounded-full bg-primary-500 text-dark-1 text-[11px] font-semibold">
+                                                        Unread
+                                                    </span>
+                                                )}
+                                                {isRead && (
+                                                    <span className="px-2 py-[3px] rounded-full bg-dark-4 text-light-3 text-[11px]">
+                                                        Read
+                                                    </span>
+                                                )}
+                                            </div>
                                         </div>
+
                                         {type === "sync_request" && userId && !isRead && (
                                             <div className="flex items-center gap-2">
                                                 <Button
@@ -154,10 +195,21 @@ function NotificationIcon() {
                                             </div>
                                         )}
 
-                                        {/* Unread Dot */}
-                                        {!isRead && (
-                                            <div className="w-2 h-2 rounded-full bg-primary-500"></div>
-                                        )}
+                                        <div className="flex items-center gap-2">
+                                            <Button
+                                                className="border border-dark-4 bg-dark-1 px-3 py-1 text-xs"
+                                                disabled={toggleReadMutation.isPending}
+                                                onClick={(event) => {
+                                                    event.stopPropagation();
+                                                    toggleReadMutation.mutate({
+                                                        id,
+                                                        isRead: !isRead,
+                                                    });
+                                                }}
+                                            >
+                                                {isRead ? "Mark Unread" : "Mark Read"}
+                                            </Button>
+                                        </div>
                                     </div>
                                 );
                             })}

@@ -11,6 +11,7 @@ import { usePostComments } from "@/hooks/usePostComments";
 import type { FeedPost } from "@/lib/types/types";
 import { useState } from "react";
 import type { UseQueryResult } from "@tanstack/react-query";
+import AdCard from "@/components/ui/AdCard";
 
 const Home = () => {
   const userId = useAuthUserId();
@@ -64,20 +65,26 @@ const Home = () => {
       />
 
       <div className="home-posts mx-auto">
-        {(posts || []).map((post) => (
-          <PostCard
-            key={post.id}
-            post={post}
-            formatDate={formatDate}
-            onOpen={setOpenPost}
-            onLike={(postId, likedByUser) =>
-              userId
-                ? likeMutation.mutate({ postId, likedByUser })
-                : undefined
-            }
-            onShare={handleShare}
-          />
+        {(posts || []).map((post, index) => (
+          <div key={post.id}>
+            <PostCard
+              post={post}
+              formatDate={formatDate}
+              onOpen={setOpenPost}
+              onLike={(postId, likedByUser) =>
+                userId
+                  ? likeMutation.mutate({ postId, likedByUser })
+                  : undefined
+              }
+              onShare={handleShare}
+            />
+
+            {(index + 1) % 3 === 0 && (
+              <AdCard text="Advertisement" />
+            )}
+          </div>
         ))}
+
         <PostModal
           post={openPost}
           onClose={() => setOpenPost(null)}

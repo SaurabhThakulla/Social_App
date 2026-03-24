@@ -50,8 +50,20 @@ export const deleteSyncRequestNotification = async function (
 export const listNotifications = async function (
     userId: string,
     limit = 20,
-    offset = 0
+    offset = 0,
+    status: "all" | "read" | "unread" = "all"
 ) {
+    const conditions = ["n.user_id = $1"];
+    const params: (string | number | boolean)[] = [userId];
+
+    if (status === "read" || status === "unread") {
+        params.push(status === "read");
+        conditions.push(`n.is_read = $${params.length}`);
+    }
+
+    const limitIndex = params.length + 1;
+    const offsetIndex = params.length + 2;
+
     const result = await pool.query(
         `SELECT
             n.id,
@@ -66,12 +78,28 @@ export const listNotifications = async function (
          FROM notifications n
          JOIN users u
          ON u.id = n.actor_id
-         WHERE n.user_id = $1
+         WHERE ${conditions.join(" AND ")}
          ORDER BY n.created_at DESC
-         LIMIT $2 OFFSET $3`,
-        [userId, limit, offset]
+         LIMIT $${limitIndex} OFFSET $${offsetIndex}`,
+        [...params, limit, offset]
     );
 
     return result.rows;
+};
+
+export const updateNotificationReadStatus = async function (
+    notificationId: string,
+    userId: string,
+    isRead: boolean
+) {
+    const result = await pool.query(
+        `UPDATE notifications
+         SET is_read = $1
+         WHERE id = $2 AND user_id = $3
+         RETURNING id, is_read AS "isRead"`,
+        [isRead, notificationId, userId]
+    );
+
+    return result.rows[0] || null;
 };
 

@@ -217,10 +217,16 @@ export const getTags = async function () {
 
 // ================= NOTIFICATIONS =================
 
-export const getNoti = async function (userId?: string) {
+export const getNoti = async function (
+    userId?: string,
+    status: "all" | "read" | "unread" = "all"
+) {
     const params = new URLSearchParams();
     if (userId) {
         params.set("userId", userId);
+    }
+    if (status && status !== "all") {
+        params.set("status", status);
     }
 
     const query = params.toString();
@@ -229,6 +235,27 @@ export const getNoti = async function (userId?: string) {
     );
 
     if (!res.ok) throw new Error("Failed to fetch notifications");
+
+    return res.json();
+};
+
+export const updateNotificationReadStatus = async function (
+    notificationId: string,
+    userId: string,
+    isRead: boolean
+) {
+    const res = await fetch(
+        `${BASE_URL}/notifications/${notificationId}/read-status`,
+        {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ userId, isRead }),
+        }
+    );
+
+    if (!res.ok) throw new Error("Failed to update notification");
 
     return res.json();
 };

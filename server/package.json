@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only index.ts",
-    "start": "NODE_ENV=production node index.js"
+    "start": "NODE_ENV=production npx tsx index.ts",
+    "dev": "ts-node-dev --respawn --transpile-only index.ts"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",

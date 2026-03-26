@@ -14,10 +14,12 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
 app.use("/api", routes);
+app.get("/", function (req, res) {
+  res.send("AURA API running ");
+});
 
 const startServer = async function () {
   await connectDB();
-
   app.listen(PORT, function () {
     console.log("local seed compiling on port " + PORT);
   });

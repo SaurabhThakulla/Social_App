@@ -6,7 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only index.ts",
-    "start": "cross-env NODE_ENV=production node index.js"
+    "start": "NODE_ENV=production node index.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",

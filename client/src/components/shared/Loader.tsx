@@ -1,5 +1,3 @@
-import React from "react";
-
 const Loader = () => {
   return (
     <div className="!bg-transparent flex h-[8px] w-full items-center justify-center mt-[6px]">

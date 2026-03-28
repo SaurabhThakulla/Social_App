@@ -10,7 +10,7 @@ type EditProfileModalProps = {
   username: string;
   bio: string;
   avatarPreview: string | null;
-  avatarInputRef: RefObject<HTMLInputElement>;
+  avatarInputRef: RefObject<HTMLInputElement | null>;
   onAvatarSelect: (event: ChangeEvent<HTMLInputElement>) => void;
   onAvatarClick: () => void;
   onClearAvatar: () => void;

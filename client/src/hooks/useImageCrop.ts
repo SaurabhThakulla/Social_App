@@ -22,7 +22,7 @@ type CropNatural = {
 };
 
 export type ImageCropController = {
-  fileInputRef: RefObject<HTMLInputElement>;
+  fileInputRef: RefObject<HTMLInputElement | null>;
   newImageDataUrl: string;
   newImageName: string;
   imageError: string | null;

@@ -9,7 +9,7 @@ type CreatePostProps = {
   canPost: boolean;
   onSubmit: () => void;
   isPosting: boolean;
-  fileInputRef: RefObject<HTMLInputElement>;
+  fileInputRef: RefObject<HTMLInputElement | null>;
   onSelectImage: (event: ChangeEvent<HTMLInputElement>) => void;
   newImageDataUrl: string;
   newImageName: string;

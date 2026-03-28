@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, type UseQueryResult } from "@tanstack/react-query";
 import {
     getNoti,
     getProfile,
@@ -17,7 +17,7 @@ export const usePosts = (
     limit = 10,
     offset = 0,
     userId?: string
-) => {
+) : UseQueryResult<FeedPost[]> => {
     return useQuery<FeedPost[]>({
         queryKey: ["posts", limit, offset, userId ?? null],
         queryFn: async () => {

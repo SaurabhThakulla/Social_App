@@ -43,7 +43,7 @@ function NotificationIcon() {
             if (!userId) throw new Error("User not authenticated");
             return declineSyncRequest(userId, requesterId);
         },
-        onSuccess: (_data, requesterId) => {
+        onSuccess: (_data, _requesterId) => {
             queryClient.invalidateQueries({ queryKey: ["noti", userId ?? null] });
             queryClient.invalidateQueries({
                 queryKey: ["sync-requests", userId, "incoming", "pending"],

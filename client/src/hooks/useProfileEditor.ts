@@ -14,6 +14,17 @@ export function useProfileEditor(userId: string | null, profile: any, avatar: st
 
     const editAvatarInputRef = useRef<HTMLInputElement>(null);
 
+    const triggerAvatarPicker = () => {
+        editAvatarInputRef.current?.click();
+    };
+
+    const clearAvatar = () => {
+        if (editAvatarInputRef.current) {
+            editAvatarInputRef.current.value = "";
+        }
+        setEditAvatar(null);
+    };
+
     const openEditProfile = () => {
         if (!profile) return;
         setEditName(profile.name ?? "");
@@ -49,6 +60,9 @@ export function useProfileEditor(userId: string | null, profile: any, avatar: st
         });
     };
 
+    const isSaving = updateProfileMutation.isPending;
+    const canSave = Boolean(editName.trim()) && Boolean(editUsername.trim());
+
     return {
         isEditingProfile,
         editName,
@@ -63,6 +77,10 @@ export function useProfileEditor(userId: string | null, profile: any, avatar: st
         closeEditProfile,
         handleAvatarSelect,
         saveProfile,
+        isSaving,
+        canSave,
+        triggerAvatarPicker,
+        clearAvatar,
         updateProfileMutation
     };
 }

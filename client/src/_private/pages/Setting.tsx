@@ -136,7 +136,13 @@ function Settings() {
 }
 
 /* Toggle Component */
-function Toggle({ label, state, setState }) {
+type ToggleProps = {
+    label: string;
+    state: boolean;
+    setState: (next: boolean) => void;
+};
+
+function Toggle({ label, state, setState }: ToggleProps) {
     return (
         <div className="flex items-center justify-between">
             <span className="text-sm text-zinc-300">

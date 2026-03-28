@@ -10,7 +10,6 @@ import { useLikePost } from "@/hooks/useLikePost";
 import { usePostComments } from "@/hooks/usePostComments";
 import type { FeedPost } from "@/lib/types/types";
 import { useState } from "react";
-import type { UseQueryResult } from "@tanstack/react-query";
 import AdCard from "@/components/ui/AdCard";
 
 const Home = () => {
@@ -20,7 +19,7 @@ const Home = () => {
     10,
     0,
     userId ?? undefined
-  ) as unknown as UseQueryResult<FeedPost[]>;
+  );
   const [openPost, setOpenPost] = useState<FeedPost | null>(null);
 
   const { newPost, setNewPost, canPost, createPostMutation, imageCrop } =

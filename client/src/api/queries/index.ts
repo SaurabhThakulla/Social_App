@@ -8,7 +8,7 @@ import {
 } from "@/api/api";
 
 import { shuffleArray } from "@/lib/hooks/shuffle";
-import type { Noti, Post, Profile, Story, User } from "@/lib/types/types";
+import type { FeedPost, Noti, Profile, Story, User } from "@/lib/types/types";
 
 
 // ================= POSTS =================
@@ -18,7 +18,7 @@ export const usePosts = (
     offset = 0,
     userId?: string
 ) => {
-    return useQuery<Post[]>({
+    return useQuery<FeedPost[]>({
         queryKey: ["posts", limit, offset, userId ?? null],
         queryFn: async () => {
             const data = await getPosts(limit, offset, userId);

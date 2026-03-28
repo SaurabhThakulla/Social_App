@@ -1,21 +1,29 @@
 import { usePosts } from "@/api/queries";
 import { useState } from "react";
 import PostModal from "@/components/shared/PostModal";
-
-interface ExplorePost {
-    id: string;
-    media?: Array<{
-        url: string;
-        type: string | null;
-    }>;
-}
+import { useAuthUserId } from "@/hooks/useAuthUserId";
+import { usePostComments } from "@/hooks/usePostComments";
+import type { FeedPost } from "@/lib/types/types";
 
 function Explore() {
     const { data: posts, isLoading } = usePosts();
-    const [selectedPost, setSelectedPost] = useState<ExplorePost | null>(null);
+    const userId = useAuthUserId();
+    const [selectedPost, setSelectedPost] = useState<FeedPost | null>(null);
+
+    const { form, comments, onSubmit } = usePostComments(
+        selectedPost?.id ?? null,
+        userId
+    );
+
+    const formatDate = (date: string) =>
+        new Date(date).toLocaleDateString("en-IN", {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+        });
 
     const mediaPosts =
-        (posts as ExplorePost[] | undefined)?.filter((post) =>
+        (posts ?? []).filter((post) =>
             Boolean(post.media?.[0]?.url)
         ) || [];
 
@@ -60,6 +68,10 @@ function Explore() {
                 <PostModal
                     post={selectedPost}
                     onClose={() => setSelectedPost(null)}
+                    formatDate={formatDate}
+                    comments={comments}
+                    form={form}
+                    onSubmit={onSubmit}
                 />
             )}
 

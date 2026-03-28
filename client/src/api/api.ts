@@ -1,4 +1,49 @@
-const BASE_URL = "http://localhost:5000/api";
+export const BASE_URL =
+    import.meta.env.VITE_API_BASE_URL ||
+    "https://socialapp-production-fee8.up.railway.app/api";
+
+// ================= AUTH =================
+
+export const signup = async function (payload: {
+    name: string;
+    username: string;
+    email: string;
+    password: string;
+}) {
+    const res = await fetch(`${BASE_URL}/auth/signup`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+    });
+
+    const data = await res.json().catch(() => ({}));
+
+    if (!res.ok)
+        throw new Error((data as any).error || "Signup failed");
+
+    return data;
+};
+
+export const login = async function (payload: {
+    email: string;
+    password: string;
+}) {
+    const res = await fetch(`${BASE_URL}/auth/login`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+    });
+
+    const data = await res.json().catch(() => ({}));
+
+    if (!res.ok) throw new Error((data as any).error || "Login failed");
+
+    return data as { token: string };
+};
 
 
 // ================= POSTS (FEED) =================
@@ -374,4 +419,3 @@ export const unsyncUser = async function (
 
     return res.json();
 };
-

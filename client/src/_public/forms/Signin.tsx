@@ -17,6 +17,7 @@ import {
 import { LoginValidation } from "@/lib/validation";
 import Loader from "@/components/shared/Loader";
 import { AUTH_USER_ID_KEY, getUserIdFromToken } from "@/hooks/useAuthUserId";
+import { login } from "@/api/api";
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -34,22 +35,7 @@ const Signin = () => {
     try {
       setIsLoading(true);
 
-      const res = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        form.setError("email", {
-          message: data.error || "Login failed",
-        });
-        return;
-      }
+      const data = await login(values);
 
       // Save token temporarily
       localStorage.setItem("token", data.token);
@@ -62,8 +48,10 @@ const Signin = () => {
       // Redirect after success
       navigate("/home");
 
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      const message =
+        error?.message || "Login failed. Please try again.";
+      form.setError("email", { message });
     } finally {
       setIsLoading(false);
     }

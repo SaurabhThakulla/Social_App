@@ -19,6 +19,8 @@ import {
 
 import { SignupValidation } from "@/lib/validation";
 import Loader from "@/components/shared/Loader";
+import { signup, login } from "@/api/api";
+import { AUTH_USER_ID_KEY, getUserIdFromToken } from "@/hooks/useAuthUserId";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -38,28 +40,28 @@ const Signup = () => {
     try {
       setIsLoading(true);
 
-      const res = await fetch("http://localhost:5000/api/auth/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
+      await signup(values);
+
+      // Auto-login after successful signup
+      const loginRes = await login({
+        email: values.email,
+        password: values.password,
       });
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        form.setError("email", {
-          message: data.error || "Signup failed",
-        });
-        return;
+      localStorage.setItem("token", loginRes.token);
+      const userId = getUserIdFromToken(loginRes.token);
+      if (userId) {
+        localStorage.setItem(AUTH_USER_ID_KEY, userId);
       }
+      window.dispatchEvent(new Event("auth-changed"));
 
       // Redirect to login page after successful signup
       navigate("/home");
 
-    } catch (error) {
-      console.error("Signup Error:", error);
+    } catch (error: any) {
+      const message =
+        error?.message || "Signup failed. Please try again.";
+      form.setError("email", { message });
     } finally {
       setIsLoading(false);
     }

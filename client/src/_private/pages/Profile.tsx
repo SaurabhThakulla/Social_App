@@ -121,11 +121,15 @@ const Profile = () => {
         avatarPreview={editor.editAvatar}
         avatarInputRef={editor.editAvatarInputRef}
         onAvatarSelect={editor.handleAvatarSelect}
+        onAvatarClick={editor.triggerAvatarPicker}
+        onClearAvatar={editor.clearAvatar}
         onNameChange={editor.setEditName}
         onUsernameChange={editor.setEditUsername}
         onBioChange={editor.setEditBio}
         onClose={editor.closeEditProfile}
         onSave={editor.saveProfile}
+        isSaving={editor.isSaving}
+        canSave={editor.canSave}
       />
 
       <SyncListModal

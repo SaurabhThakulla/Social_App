@@ -91,7 +91,7 @@ Infrastructure:
 
 ### Clone
 
-git clone https://github.com/yourusername/aura.git
+https://github.com/SaurabhThakulla/Social_App.git
 cd aura
 
 ---
@@ -103,16 +103,6 @@ npm install
 
 cd ../backend
 npm install
-
----
-
-### Environment Variables
-
-Create a `.env` file in /backend:
-
-PORT=5000
-DATABASE_URL=your_postgres_connection
-JWT_SECRET=your_secret
 
 ---
 

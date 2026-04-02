@@ -1,194 +1,153 @@
 # AURA
 
-## 🌌 What is AURA?
+## Overview
 
-**AURA** is a Gen-Z social media platform focused on **vibes, moods, and expression** rather than likes or followers.
+AURA is a social platform designed around expression rather than validation.  
+It removes traditional engagement metrics (likes, followers, views) and replaces them with a system centered on user vibe, interaction quality, and presence.
 
-Traditional social media creates pressure through visible metrics like followers, likes, and views. AURA removes those elements and replaces them with **Aura ranks and expressive interactions**.
-
-> Expression over validation.
-> Vibes over numbers.
-> Fun over perfection.
-
----
-
-# ⚡ How AURA Works
-
-1. Users create posts (photo, video, or text)
-2. Posts receive **Aura**
-3. Aura increases the user's **Aura Rank**
-4. Higher ranks unlock **visual effects and visibility**
+The platform emphasizes:
+- Expression over performance  
+- Interaction over metrics  
+- Identity over popularity  
 
 ---
 
-# 💬 Interactions
+## Core Concept
 
-| Interaction | Meaning        |
-| ----------- | -------------- |
-| Aura        | Like a post    |
-| Sync Aura   | Follow someone |
-| Yap         | Comment        |
-| Transmit    | Share          |
-| Spilt       | Create a post  |
+Instead of tracking visible numbers, AURA introduces:
 
----
+- Aura → engagement signal on posts  
+- Aura Rank → dynamic representation of user presence  
+- Unlockable UI states → visual progression based on activity  
 
-# 🏗 System Architecture
-
-```
-                ┌─────────────────────┐
-                │      Frontend       │
-                │       React         │
-                │  (UI + State)       │
-                └─────────▲───────────┘
-                          │ API Calls
-                          │
-                ┌─────────┴───────────┐
-                │       Backend       │
-                │      Node.js        │
-                │     Express API     │
-                └─────────▲───────────┘
-                          │
-                          │ ORM / Queries
-                          │
-                ┌─────────┴───────────┐
-                │      Database       │
-                │     PostgreSQL      │
-                └─────────▲───────────┘
-                          │
-                          │ File Storage
-                          │
-                ┌─────────┴───────────┐
-                │    Image Storage    │
-                │ (Cloud / CDN / S3)  │
-                └─────────────────────┘
-```
-
-### Architecture Flow
-
-1. User interacts with **React frontend**
-2. Requests go to **Node.js Express API**
-3. Backend processes:
-
-   * posts
-   * comments
-   * aura interactions
-   * rank calculations
-4. Data stored in **PostgreSQL**
-5. Media stored in **cloud storage**
+This shifts the focus from competition to participation.
 
 ---
 
-# 🛠 Tech Stack
+## Interaction Model
 
-Frontend
-
-* React
-* TailwindCSS
-* TypeScript
-
-Backend
-
-* Node.js
-* Express.js
-
-Database
-
-* PostgreSQL
-
-Other
-
-* REST API
-* Cloud image storage
+| Action      | Description              |
+|------------|--------------------------|
+| Aura       | React to a post          |
+| Sync Aura  | Follow a user            |
+| Yap        | Comment                  |
+| Transmit   | Share content            |
+| Split      | Create a post            |
 
 ---
 
-# ⚙ Installation Guide
+## System Architecture
 
-### Clone the repository
+Frontend (React + TypeScript + Tailwind)
+        │
+        │ HTTP / REST API
+        ▼
+Backend (Node.js + Express)
+        │
+        │ ORM / Queries
+        ▼
+Database (PostgreSQL)
+        │
+        ▼
+Cloud Storage (S3 / CDN)
 
-```bash
+---
+
+## Flow
+
+1. Client interacts with React UI  
+2. Requests are sent to Express API  
+3. Backend handles:
+   - Posts
+   - Interactions
+   - Aura calculation
+   - Ranking logic  
+4. Data is persisted in PostgreSQL  
+5. Media is stored in cloud storage  
+
+---
+
+## Tech Stack
+
+Frontend:
+- React
+- TypeScript
+- TailwindCSS
+
+Backend:
+- Node.js
+- Express.js
+
+Database:
+- PostgreSQL
+
+Infrastructure:
+- REST API
+- Cloud storage (S3 / CDN)
+
+---
+
+## Setup
+
+### Clone
+
 git clone https://github.com/yourusername/aura.git
 cd aura
-```
 
 ---
 
-### Install dependencies
+### Install Dependencies
 
-Frontend
-
-```bash
 cd frontend
 npm install
-```
 
-Backend
-
-```bash
-cd backend
+cd ../backend
 npm install
-```
 
 ---
 
-###  Setup environment variables
+### Environment Variables
 
-Create a `.env` file inside **backend**
+Create a `.env` file in /backend:
 
-Example:
-
-```
 PORT=5000
 DATABASE_URL=your_postgres_connection
 JWT_SECRET=your_secret
-```
 
 ---
 
-###  Run the backend
+### Run Backend
 
-```bash
 npm run dev
-```
 
-Server starts at:
-
-```
+Server:
 http://localhost:5000
-```
 
 ---
 
-### 5️Run the frontend
+### Run Frontend
 
-```bash
 cd frontend
 npm run dev
-```
 
-Frontend starts at:
-
-```
+Client:
 http://localhost:5173
-```
 
 ---
 
-# Future Features
+## Roadmap
 
-* Aura-based recommendation algorithm
-* Real-time interactions
-* Rank-based feed
-* Creator aura boosts
-* Mood-based discovery
+- Aura-based recommendation system  
+- Real-time interactions (WebSockets)  
+- Rank-driven feed algorithm  
+- Creator boost mechanics  
+- Mood-based discovery engine  
 
 ---
 
-#  Philosophy
+## Design Principles
 
-AURA is designed to remove the toxic parts of social media and focus on **authentic expression and internet culture.**
-
-No follower counts.
-No like chasing.
-Just **vibes.**
+- No visible engagement metrics  
+- Reduced social pressure  
+- Lightweight, fast UI  
+- Modular and scalable architecture  
